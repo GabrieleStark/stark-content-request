@@ -8,21 +8,75 @@ import { sendApproved, sendRejected } from './_email.js';
 const NOTION_API   = 'https://api.notion.com/v1';
 const NOTION_VER   = '2022-06-28';
 
+function richText(str) {
+  return [{ text: { content: String(str || '') } }];
+}
+
+function makeRow(label, value) {
+  if (!value) return null;
+  return {
+    type: 'bulleted_list_item',
+    bulleted_list_item: {
+      rich_text: [
+        { text: { content: `${label}: `, annotations: { bold: true } } },
+        { text: { content: String(value) } },
+      ],
+    },
+  };
+}
+
 async function createNotionTask(item) {
   const name     = item.name;
   const deadline = getColValue(item, COL.deadline);
-  const notes    = `Created from Monday ticket #${item.id}. ${getColValue(item, COL.notes) || ''}`.trim();
 
+  // Properties for the Projects database
   const props = {
-    'Task': { title: [{ text: { content: name } }] },
-    'Status': { select: { name: 'To Do' } },
-    'Type':   { select: { name: 'Filming' } },
-    'Notes':  { rich_text: [{ text: { content: notes } }] },
+    'Name':   { title: richText(name) },
+    'Status': { status: { name: 'Not Started' } },
   };
 
   if (deadline) {
-    props['Date'] = { date: { start: deadline } };
+    props['Due Date'] = { date: { start: deadline } };
   }
+
+  // Build page body with all form fields
+  const fields = [
+    makeRow('Format',            getColValue(item, COL.format)
+                                   + (getColValue(item, COL.videoFormat) ? ` · ${getColValue(item, COL.videoFormat)}` : '')),
+    makeRow('Content Type',      getColValue(item, COL.contentType)),
+    makeRow('Distribution',      getColValue(item, COL.distribution)),
+    makeRow('Quantity',          getColValue(item, COL.quantity)),
+    makeRow('Deadline',          deadline),
+    makeRow('Location',          getColValue(item, COL.location)),
+    makeRow('Priority',          getColValue(item, COL.priority)),
+    makeRow('Bikes Involved',    getColValue(item, COL.bikesInvolved)),
+    makeRow('Which Models',      getColValue(item, COL.whichModels)),
+    makeRow('Actors/Riders',     getColValue(item, COL.actors)),
+    makeRow('Requester',         getColValue(item, COL.requester)),
+    makeRow('Requester Email',   getColValue(item, COL.requesterEmail)),
+    makeRow('Recipient',         getColValue(item, COL.recipient)),
+    makeRow('Coordinate With',   getColValue(item, COL.peopleToCoordinate)),
+    makeRow('Monday Ticket #',   item.id),
+  ].filter(Boolean);
+
+  const notes = getColValue(item, COL.notes);
+  const children = [
+    {
+      type: 'heading_2',
+      heading_2: { rich_text: richText('Request Details') },
+    },
+    ...fields,
+    ...(notes ? [
+      {
+        type: 'heading_2',
+        heading_2: { rich_text: richText('Notes') },
+      },
+      {
+        type: 'paragraph',
+        paragraph: { rich_text: richText(notes) },
+      },
+    ] : []),
+  ];
 
   const notionRes = await fetch(`${NOTION_API}/pages`, {
     method:  'POST',
@@ -34,6 +88,7 @@ async function createNotionTask(item) {
     body: JSON.stringify({
       parent:     { database_id: process.env.NOTION_TASKS_DS_ID },
       properties: props,
+      children,
     }),
   });
   if (!notionRes.ok) {
