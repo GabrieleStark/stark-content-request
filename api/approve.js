@@ -24,7 +24,7 @@ async function createNotionTask(item) {
     props['Date'] = { date: { start: deadline } };
   }
 
-  await fetch(`${NOTION_API}/pages`, {
+  const notionRes = await fetch(`${NOTION_API}/pages`, {
     method:  'POST',
     headers: {
       'Authorization':  `Bearer ${process.env.NOTION_API_KEY}`,
@@ -36,6 +36,10 @@ async function createNotionTask(item) {
       properties: props,
     }),
   });
+  if (!notionRes.ok) {
+    const err = await notionRes.text();
+    throw new Error(`Notion API error ${notionRes.status}: ${err}`);
+  }
 }
 
 export default async function handler(req, res) {
