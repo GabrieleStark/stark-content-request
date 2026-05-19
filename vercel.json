@@ -1,8 +1,4 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/track", "destination": "/track.html" },
-    { "source": "/reject", "destination": "/reject.html" },
-    { "source": "/edit", "destination": "/edit.html" }
-  ]
+  "cleanUrls": true
 }
