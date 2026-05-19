@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Request — Stark Future</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 16px 80px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    header {
+      margin-bottom: 48px;
+    }
+
+    .logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .divider {
+      height: 1px;
+      background: #222;
+      margin: 40px 0;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    .field {
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ccc;
+      margin-bottom: 8px;
+    }
+
+    label .required {
+      color: #e2445c;
+      margin-left: 3px;
+    }
+
+    label .hint {
+      font-weight: 400;
+      color: #555;
+      font-size: 12px;
+      margin-left: 6px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      background: #141414;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      color: #f0f0f0;
+      font-size: 14px;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color 0.15s;
+      font-family: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="date"]:focus,
+    input[type="url"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #444;
+      background: #181818;
+    }
+
+    input::placeholder, textarea::placeholder { color: #444; }
+
+    textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    select option { background: #1a1a1a; }
+
+    /* Pill toggle (Photo / Video / Mixed) */
+    .pill-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill-group input[type="radio"],
+    .pill-group input[type="checkbox"] { display: none; }
+
+    .pill-group label {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      border-radius: 100px;
+      border: 1px solid #2a2a2a;
+      background: #141414;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: #888;
+      transition: all 0.15s;
+      margin: 0;
+      user-select: none;
+    }
+
+    .pill-group input[type="radio"]:checked + label,
+    .pill-group input[type="checkbox"]:checked + label {
+      background: #f0f0f0;
+      color: #0a0a0a;
+      border-color: #f0f0f0;
+    }
+
+    /* Yes / No toggle */
+    .toggle-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .toggle-group input[type="radio"] { display: none; }
+
+    .toggle-group label {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #2a2a2a;
+      background: #141414;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: #888;
+      transition: all 0.15s;
+      margin: 0;
+    }
+
+    .toggle-group input[type="radio"]:checked + label {
+      background: #f0f0f0;
+      color: #0a0a0a;
+      border-color: #f0f0f0;
+    }
+
+    /* Conditional field */
+    .conditional { display: none; }
+    .conditional.visible { display: block; }
+
+    /* Priority pills with colors */
+    #prio-urgent:checked + label { background: #e2445c; color: #fff; border-color: #e2445c; }
+    #prio-normal:checked + label  { background: #fdab3d; color: #fff; border-color: #fdab3d; }
+    #prio-low:checked + label     { background: #444; color: #f0f0f0; border-color: #444; }
+
+    /* Submit */
+    .submit-area { margin-top: 40px; }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      background: #f0f0f0;
+      color: #0a0a0a;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    button[type="submit"]:hover { opacity: 0.88; }
+    button[type="submit"]:active { transform: scale(0.99); }
+    button[type="submit"]:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .submit-note {
+      font-size: 12px;
+      color: #444;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* Success state */
+    .success {
+      display: none;
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .success .check {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .success h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .success p {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .success button {
+      margin-top: 32px;
+      padding: 12px 28px;
+      background: #222;
+      color: #f0f0f0;
+      border: 1px solid #333;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* Error */
+    .error-msg {
+      font-size: 12px;
+      color: #e2445c;
+      margin-top: 6px;
+      display: none;
+    }
+
+    input.error, select.error, textarea.error {
+      border-color: #e2445c;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo">Stark Future</div>
+    <h1>Content Request</h1>
+    <p>Fill in the details below and the production team will review your request.</p>
+  </header>
+
+  <form id="requestForm" novalidate>
+
+    <!-- PRIORITY -->
+    <div class="field">
+      <label>Priority <span class="required">*</span></label>
+      <div class="pill-group">
+        <input type="radio" name="priority" id="prio-urgent" value="Urgent" required />
+        <label for="prio-urgent">🔴 Urgent</label>
+
+        <input type="radio" name="priority" id="prio-normal" value="Normal" checked />
+        <label for="prio-normal">🟡 Normal</label>
+
+        <input type="radio" name="priority" id="prio-low" value="Low" />
+        <label for="prio-low">⚪ Low</label>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION: THE REQUEST -->
+    <div class="section-label">The Request</div>
+
+    <div class="field">
+      <label for="request">Brief description <span class="required">*</span></label>
+      <textarea id="request" name="request" placeholder="What do you need? Be as specific as possible." required></textarea>
+      <div class="error-msg" id="err-request">Please describe your request.</div>
+    </div>
+
+    <div class="field">
+      <label>Format <span class="required">*</span></label>
+      <div class="pill-group">
+        <input type="radio" name="format" id="fmt-photo" value="Photo" required />
+        <label for="fmt-photo">📷 Photo</label>
+
+        <input type="radio" name="format" id="fmt-video" value="Video" />
+        <label for="fmt-video">🎬 Video</label>
+
+        <input type="radio" name="format" id="fmt-mixed" value="Mixed" />
+        <label for="fmt-mixed">Mixed</label>
+      </div>
+      <div class="error-msg" id="err-format">Please select a format.</div>
+    </div>
+
+    <!-- Video Format — conditional -->
+    <div class="field conditional" id="field-video-format">
+      <label for="videoFormat">Video format <span class="required">*</span></label>
+      <select id="videoFormat" name="videoFormat">
+        <option value="">Select…</option>
+        <option>Horizontal 16:9</option>
+        <option>Vertical 9:16</option>
+        <option>Square 1:1</option>
+        <option>Short-form / Reel</option>
+        <option>Multiple formats</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="contentType">Content type <span class="required">*</span></label>
+      <select id="contentType" name="contentType" required>
+        <option value="">Select…</option>
+        <option>Launch</option>
+        <option>Social Clip</option>
+        <option>YouTube Long-form</option>
+        <option>Tutorial</option>
+        <option>Event Coverage</option>
+        <option>Testimonial</option>
+        <option>Website Asset</option>
+        <option>Internal</option>
+      </select>
+      <div class="error-msg" id="err-contentType">Please select a content type.</div>
+    </div>
+
+    <div class="field">
+      <label for="distribution">Distribution <span class="required">*</span> <span class="hint">Where will this be used?</span></label>
+      <select id="distribution" name="distribution" required>
+        <option value="">Select…</option>
+        <option>YouTube</option>
+        <option>Social Media</option>
+        <option>Website</option>
+        <option>Dealer Network</option>
+        <option>Internal</option>
+        <option>Inside Network</option>
+      </select>
+      <div class="error-msg" id="err-distribution">Please select a distribution channel.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION: LOGISTICS -->
+    <div class="section-label">Logistics</div>
+
+    <div class="field">
+      <label for="quantity">Quantity <span class="required">*</span> <span class="hint">Number of assets needed</span></label>
+      <input type="number" id="quantity" name="quantity" min="1" placeholder="e.g. 3" required />
+      <div class="error-msg" id="err-quantity">Please enter a quantity.</div>
+    </div>
+
+    <div class="field">
+      <label for="deadline">Deadline <span class="required">*</span></label>
+      <input type="date" id="deadline" name="deadline" required />
+      <div class="error-msg" id="err-deadline">Please set a deadline.</div>
+    </div>
+
+    <div class="field">
+      <label>Location <span class="required">*</span></label>
+      <div class="pill-group">
+        <input type="radio" name="location" id="loc-studios" value="Studios" required />
+        <label for="loc-studios">Studios</label>
+
+        <input type="radio" name="location" id="loc-specific" value="Specific Location" />
+        <label for="loc-specific">Specific Location</label>
+
+        <input type="radio" name="location" id="loc-tbd" value="TBD — We Decide" />
+        <label for="loc-tbd">TBD — We Decide</label>
+      </div>
+      <div class="error-msg" id="err-location">Please select a location.</div>
+    </div>
+
+    <div class="field">
+      <label>Bikes involved? <span class="required">*</span></label>
+      <div class="toggle-group">
+        <input type="radio" name="bikesInvolved" id="bikes-yes" value="Yes" required />
+        <label for="bikes-yes">Yes</label>
+
+        <input type="radio" name="bikesInvolved" id="bikes-no" value="No" />
+        <label for="bikes-no">No</label>
+      </div>
+      <div class="error-msg" id="err-bikes">Please select an option.</div>
+    </div>
+
+    <!-- Which Models — conditional -->
+    <div class="field conditional" id="field-models">
+      <label for="whichModels">Which models?</label>
+      <input type="text" id="whichModels" name="whichModels" placeholder="e.g. VARG MX, VARG SM" />
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION: OPTIONAL -->
+    <div class="section-label">Details <span style="color:#444;font-weight:400;text-transform:none;letter-spacing:0">— optional</span></div>
+
+    <div class="field">
+      <label for="actors">Actors / Riders <span class="hint">Who needs to be on camera?</span></label>
+      <input type="text" id="actors" name="actors" placeholder="e.g. Anton, external rider TBD" />
+    </div>
+
+    <div class="field">
+      <label for="requester">Requester <span class="hint">Department, sponsor, dealer…</span></label>
+      <input type="text" id="requester" name="requester" placeholder="e.g. Marketing, Dealer Spain, R&D" />
+    </div>
+
+    <div class="field">
+      <label for="recipient">Recipient <span class="hint">Who should receive the final files?</span></label>
+      <input type="text" id="recipient" name="recipient" placeholder="e.g. Ben, dealer@example.com" />
+    </div>
+
+    <div class="field">
+      <label for="peopleToCoordinate">People to coordinate <span class="hint">Anyone specific needed in planning?</span></label>
+      <input type="text" id="peopleToCoordinate" name="peopleToCoordinate" placeholder="e.g. Federico for logistics" />
+    </div>
+
+    <div class="field">
+      <label for="reference">Reference / Moodboard</label>
+      <input type="url" id="reference" name="reference" placeholder="https://…" />
+    </div>
+
+    <div class="field">
+      <label>Approval required?</label>
+      <div class="toggle-group">
+        <input type="radio" name="approvalRequired" id="appr-yes" value="Yes" />
+        <label for="appr-yes">Yes</label>
+
+        <input type="radio" name="approvalRequired" id="appr-no" value="No" checked />
+        <label for="appr-no">No</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="notes">Notes</label>
+      <textarea id="notes" name="notes" placeholder="Anything else the team should know…"></textarea>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-area">
+      <button type="submit" id="submitBtn">Send Request</button>
+      <p class="submit-note">Your request will appear in Monday automatically.</p>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS -->
+  <div class="success" id="successState">
+    <div class="check">✅</div>
+    <h2>Request sent!</h2>
+    <p>The production team has been notified.<br />You'll hear back soon.</p>
+    <button onclick="resetForm()">Submit another request</button>
+  </div>
+
+</div>
+
+<script>
+  // ── Conditional fields ──────────────────────────────────────────────
+
+  document.querySelectorAll('input[name="format"]').forEach(el => {
+    el.addEventListener('change', () => {
+      const show = el.value === 'Video' || el.value === 'Mixed';
+      document.getElementById('field-video-format').classList.toggle('visible', show);
+    });
+  });
+
+  document.querySelectorAll('input[name="bikesInvolved"]').forEach(el => {
+    el.addEventListener('change', () => {
+      document.getElementById('field-models').classList.toggle('visible', el.value === 'Yes');
+    });
+  });
+
+  // ── Validation ──────────────────────────────────────────────────────
+
+  function validate() {
+    let ok = true;
+
+    const checks = [
+      { id: 'request',      errId: 'err-request',      check: v => v.trim().length > 0 },
+      { id: 'contentType',  errId: 'err-contentType',  check: v => v !== '' },
+      { id: 'distribution', errId: 'err-distribution', check: v => v !== '' },
+      { id: 'quantity',     errId: 'err-quantity',      check: v => v > 0 },
+      { id: 'deadline',     errId: 'err-deadline',      check: v => v !== '' },
+    ];
+
+    checks.forEach(({ id, errId, check }) => {
+      const el = document.getElementById(id);
+      const err = document.getElementById(errId);
+      const valid = check(el.value);
+      el.classList.toggle('error', !valid);
+      err.style.display = valid ? 'none' : 'block';
+      if (!valid) ok = false;
+    });
+
+    // Radio groups
+    ['format', 'location', 'bikesInvolved', 'priority'].forEach(name => {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      const errId = `err-${name === 'bikesInvolved' ? 'bikes' : name}`;
+      const err = document.getElementById(errId);
+      if (err) { err.style.display = selected ? 'none' : 'block'; if (!selected) ok = false; }
+    });
+
+    // Video format conditional
+    const fmt = document.querySelector('input[name="format"]:checked');
+    if (fmt && (fmt.value === 'Video' || fmt.value === 'Mixed')) {
+      const vf = document.getElementById('videoFormat');
+      if (!vf.value) { vf.classList.add('error'); ok = false; }
+      else vf.classList.remove('error');
+    }
+
+    return ok;
+  }
+
+  // ── Submit ──────────────────────────────────────────────────────────
+
+  document.getElementById('requestForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const data = {
+      priority:           document.querySelector('input[name="priority"]:checked')?.value,
+      request:            document.getElementById('request').value.trim(),
+      format:             document.querySelector('input[name="format"]:checked')?.value,
+      videoFormat:        document.getElementById('videoFormat').value || null,
+      contentType:        document.getElementById('contentType').value,
+      distribution:       document.getElementById('distribution').value,
+      quantity:           parseInt(document.getElementById('quantity').value, 10),
+      deadline:           document.getElementById('deadline').value,
+      location:           document.querySelector('input[name="location"]:checked')?.value,
+      bikesInvolved:      document.querySelector('input[name="bikesInvolved"]:checked')?.value,
+      whichModels:        document.getElementById('whichModels').value.trim() || null,
+      actors:             document.getElementById('actors').value.trim() || null,
+      requester:          document.getElementById('requester').value.trim() || null,
+      recipient:          document.getElementById('recipient').value.trim() || null,
+      peopleToCoordinate: document.getElementById('peopleToCoordinate').value.trim() || null,
+      reference:          document.getElementById('reference').value.trim() || null,
+      approvalRequired:   document.querySelector('input[name="approvalRequired"]:checked')?.value,
+      notes:              document.getElementById('notes').value.trim() || null,
+    };
+
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error('Server error');
+
+      document.getElementById('requestForm').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Send Request';
+      alert('Something went wrong. Please try again or contact the production team directly.');
+    }
+  });
+
+  function resetForm() {
+    document.getElementById('requestForm').reset();
+    document.getElementById('requestForm').style.display = 'block';
+    document.getElementById('successState').style.display = 'none';
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('submitBtn').textContent = 'Send Request';
+    document.querySelectorAll('.conditional').forEach(el => el.classList.remove('visible'));
+  }
+</script>
+</body>
+</html>

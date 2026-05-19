@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track Request — Stark Future</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #f0f0f0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 16px; }
+    .card { width: 100%; max-width: 520px; }
+    .logo { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #555; margin-bottom: 32px; }
+    h1 { font-size: 22px; font-weight: 600; letter-spacing: -.02em; margin-bottom: 6px; }
+    .subtitle { font-size: 14px; color: #666; margin-bottom: 36px; line-height: 1.5; }
+    .status-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 600; margin-bottom: 32px; }
+    /* Progress */
+    .steps { display: flex; align-items: center; margin: 0 0 36px; }
+    .step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; }
+    .step-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #333; background: #111; display: flex; align-items: center; justify-content: center; font-size: 12px; z-index: 1; }
+    .step-dot.done   { background: #00c875; border-color: #00c875; }
+    .step-dot.active { background: #fdab3d; border-color: #fdab3d; }
+    .step-dot.reject { background: #e2445c; border-color: #e2445c; }
+    .step-label { font-size: 11px; color: #555; text-align: center; }
+    .step-label.done   { color: #00c875; }
+    .step-label.active { color: #fdab3d; }
+    .step-line { flex: 1; height: 2px; background: #222; margin: 0 -4px; margin-bottom: 20px; }
+    .step-line.done { background: #00c875; }
+    /* Rejection */
+    .rejection { background: #1a0a0c; border: 1px solid #3a1520; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+    .rejection-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #e2445c; margin-bottom: 8px; }
+    .rejection-reason { font-size: 14px; color: #ccc; line-height: 1.6; }
+    .btn { display: inline-block; padding: 13px 24px; border-radius: 9px; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; font-family: inherit; }
+    .btn-primary { background: #f0f0f0; color: #0a0a0a; }
+    .btn-ghost { background: #1a1a1a; color: #888; border: 1px solid #222; margin-top: 12px; display: block; text-align: center; }
+    .meta { font-size: 12px; color: #333; margin-top: 32px; }
+    .loading { color: #555; font-size: 14px; }
+    .error { color: #e2445c; font-size: 14px; }
+  </style>
+</head>
+<body>
+<div class="card" id="root">
+  <p class="loading">Loading…</p>
+</div>
+<script>
+  const APP = '';
+  const params = new URLSearchParams(location.search);
+  const itemId = params.get('id');
+  const msg    = params.get('msg');
+
+  async function load() {
+    if (!itemId) { render404(); return; }
+    try {
+      const res = await fetch(`${APP}/api/track?id=${itemId}`);
+      if (!res.ok) { render404(); return; }
+      const data = await res.json();
+      renderStatus(data);
+    } catch { document.getElementById('root').innerHTML = '<p class="error">Failed to load. Please try again.</p>'; }
+  }
+
+  function renderStatus(d) {
+    const steps = [
+      { label: 'Submitted', step: 0 },
+      { label: 'In Review',    step: 1 },
+      { label: 'In Production', step: 2 },
+      { label: 'Delivered',    step: 3 },
+    ];
+
+    const isRejected = d.step === -1;
+
+    const stepsHtml = isRejected ? '' : steps.map((s, i) => {
+      const done   = d.step > s.step;
+      const active = d.step === s.step;
+      const cls    = done ? 'done' : active ? 'active' : '';
+      const icon   = done ? '✓' : active ? '●' : '';
+      const line   = i < steps.length - 1
+        ? `<div class="step-line ${d.step > s.step ? 'done' : ''}"></div>`
+        : '';
+      return `
+        <div class="step">
+          <div class="step-dot ${cls}">${icon}</div>
+          <div class="step-label ${cls}">${s.label}</div>
+        </div>
+        ${line}
+      `;
+    }).join('');
+
+    const badgeStyle = `background:${d.statusColor}22;color:${d.statusColor};`;
+    const badge = `<span class="status-badge" style="${badgeStyle}">● ${d.statusLabel}</span>`;
+
+    const rejectionHtml = isRejected ? `
+      <div class="rejection">
+        <div class="rejection-label">Reason</div>
+        <div class="rejection-reason">${d.rejectionReason || 'No reason provided.'}</div>
+      </div>
+      ${d.editToken ? `<a href="${APP}/edit?token=${d.editToken}" class="btn btn-primary">✏️ Edit and resubmit</a>` : ''}
+    ` : '';
+
+    const msgHtml = msg === 'approved'
+      ? `<div style="background:#00c87520;border:1px solid #00c87540;border-radius:8px;padding:12px 16px;font-size:13px;color:#00c875;margin-bottom:24px">✅ Approved by Amedeo — task created in Notion.</div>`
+      : '';
+
+    document.getElementById('root').innerHTML = `
+      <div class="logo">Stark Future · Content Requests</div>
+      <h1>${d.name}</h1>
+      <p class="subtitle">Request #${d.id}${d.deadline ? ` · Deadline: ${d.deadline}` : ''}</p>
+      ${msgHtml}
+      ${badge}
+      ${isRejected ? '' : `<div class="steps">${stepsHtml}</div>`}
+      ${rejectionHtml}
+      <meta class="meta">Last updated automatically.</meta>
+      <a href="${APP}/" class="btn btn-ghost">← New request</a>
+    `;
+  }
+
+  function render404() {
+    document.getElementById('root').innerHTML = `
+      <div class="logo">Stark Future · Content Requests</div>
+      <h1>Ticket not found</h1>
+      <p class="subtitle" style="margin-bottom:32px">Check the link in your email.</p>
+      <a href="${APP}/" class="btn btn-primary">← Submit a new request</a>
+    `;
+  }
+
+  load();
+</script>
+</body>
+</html>

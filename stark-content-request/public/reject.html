@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reject Request — Stark Future</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #f0f0f0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 32px 16px; }
+    .card { width: 100%; max-width: 480px; }
+    .logo { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #555; margin-bottom: 32px; }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+    .sub { font-size: 14px; color: #666; margin-bottom: 32px; line-height: 1.5; }
+    .ticket-name { font-size: 15px; font-weight: 600; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px; padding: 14px 16px; margin-bottom: 28px; color: #ddd; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #aaa; margin-bottom: 8px; }
+    textarea { width: 100%; background: #141414; border: 1px solid #2a2a2a; border-radius: 8px; color: #f0f0f0; font-size: 14px; padding: 12px 14px; outline: none; resize: vertical; min-height: 110px; font-family: inherit; line-height: 1.5; }
+    textarea:focus { border-color: #444; }
+    textarea::placeholder { color: #444; }
+    .actions { display: flex; gap: 10px; margin-top: 20px; }
+    button { flex: 1; padding: 13px; border-radius: 9px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; border: none; }
+    .btn-reject { background: #e2445c; color: #fff; }
+    .btn-cancel { background: #1a1a1a; color: #888; border: 1px solid #2a2a2a; }
+    .btn-reject:disabled { opacity: .5; cursor: not-allowed; }
+    .success { display: none; text-align: center; padding: 40px 0; }
+    .success .icon { font-size: 40px; margin-bottom: 16px; }
+    .success h2 { font-size: 20px; margin-bottom: 8px; }
+    .success p { font-size: 14px; color: #666; }
+    .loading { font-size: 14px; color: #555; }
+    .error { font-size: 14px; color: #e2445c; margin-top: 12px; display: none; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">Stark Future · Content Requests</div>
+
+  <div id="formView">
+    <h1>Reject request</h1>
+    <p class="sub">Leave a note explaining why — the requester will see this message and can edit and resubmit.</p>
+    <div class="ticket-name loading" id="ticketName">Loading…</div>
+    <label for="reason">Reason for rejection</label>
+    <textarea id="reason" placeholder="e.g. Not feasible by this deadline — please propose a date after June 10th." autofocus></textarea>
+    <div class="error" id="errorMsg">Something went wrong. Please try again.</div>
+    <div class="actions">
+      <button class="btn-cancel" onclick="history.back()">← Go back</button>
+      <button class="btn-reject" id="rejectBtn" onclick="submitRejection()">Confirm rejection</button>
+    </div>
+  </div>
+
+  <div class="success" id="successView">
+    <div class="icon">✅</div>
+    <h2>Rejection sent</h2>
+    <p>The requester has been notified<br/>and can edit and resubmit their request.</p>
+  </div>
+</div>
+
+<script>
+  const APP    = '';
+  const params = new URLSearchParams(location.search);
+  const token  = params.get('token');
+
+  // Load ticket name for context
+  async function loadTicket() {
+    if (!token) return;
+    try {
+      // We use the edit endpoint to fetch item data via approve token is not exposed,
+      // so we show a generic label — Amedeo has context from the email
+      document.getElementById('ticketName').textContent = 'Content request';
+      document.getElementById('ticketName').classList.remove('loading');
+    } catch { /* non-critical */ }
+  }
+
+  async function submitRejection() {
+    const reason = document.getElementById('reason').value.trim();
+    const btn    = document.getElementById('rejectBtn');
+    const err    = document.getElementById('errorMsg');
+    err.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(`${APP}/api/approve`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token, reason }),
+      });
+      if (!res.ok) throw new Error();
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('successView').style.display = 'block';
+    } catch {
+      err.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Confirm rejection';
+    }
+  }
+
+  loadTicket();
+</script>
+</body>
+</html>

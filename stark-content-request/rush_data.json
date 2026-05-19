@@ -1,0 +1,2999 @@
+[
+  {
+    "clip": "08-05 Project F Dyno Test",
+    "type": "BTS",
+    "date": "2026-05-08",
+    "location": "Workshop",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "07-05 Ride Loic Bruni",
+    "type": "BTS",
+    "date": "2026-05-07",
+    "location": "Dani Villa",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "07-05 Niko Project F Update",
+    "type": "BTS",
+    "date": "2026-05-07",
+    "location": "Workshop",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "08-04 Kart presentation FIA",
+    "type": "BTS",
+    "date": "2026-04-08",
+    "location": "Gibernau",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "02-04 Kart Gibernau Alguersuari Test",
+    "type": "BTS",
+    "date": "2026-04-02",
+    "location": "Gibernau",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "01-04 TC Test Golf MX",
+    "type": "BTS",
+    "date": "2026-04-01",
+    "location": "Track MX Golf",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "31-03 TC Test SM Vic",
+    "type": "BTS",
+    "date": "2026-03-31",
+    "location": "Circuit",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "31-03 Ben CTA Mototerapia",
+    "type": "BTS",
+    "date": "2026-03-31",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "30-03 Kike Kart Updates 3rd gen",
+    "type": "BTS",
+    "date": "2026-03-30",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "30-03 Ben's items list",
+    "type": "B-Roll",
+    "date": "2026-03-30",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "30-03 Mototerapia Ben Office + Website",
+    "type": "B-Roll",
+    "date": "2026-03-30",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "24-03 Erzbergrodeo Plan 1 Meeting",
+    "type": "BTS",
+    "date": "2026-03-24",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "19-03 Anton at the Studios BTS",
+    "type": "BTS",
+    "date": "2026-03-19",
+    "location": "Office",
+    "used": true,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "19-03 Kart FIA First Meeting",
+    "type": "BTS",
+    "date": "2026-03-19",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "19-03 Mototerapia - Items in the Studios",
+    "type": "BTS",
+    "date": "2026-03-19",
+    "location": "Studios",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "18-03 Mototerapia - Ben calls",
+    "type": "BTS",
+    "date": "2026-03-18",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "18-03 Sitges Track Record - Brief & Ideas",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "AUTODROMO TRACK RECORD",
+    "color_rgb": "FF9900FF"
+  },
+  {
+    "clip": "17-03 Traction Control Jordi Test Polea",
+    "type": "BTS",
+    "date": "2026-03-17",
+    "location": "Polea",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "11-03 Racing Party 2026 Superenduro Celebration",
+    "type": "BTS",
+    "date": "2026-03-11",
+    "location": "Workshop",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEA9999"
+  },
+  {
+    "clip": "11-03 Titan + Brakes Test MX Golf (Seb+Paul+Jordi)",
+    "type": "BTS",
+    "date": "2026-03-11",
+    "location": "Track MX Golf",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "09-03 Day In The Life Employees at the Office",
+    "type": "BTS",
+    "date": "2026-03-09",
+    "location": "Office",
+    "used": true,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "06-03 Monthly Meeting",
+    "type": "BTS",
+    "date": "2026-03-06",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF000000"
+  },
+  {
+    "clip": "05-03 VARG 2 Magic Throttle Rivendell Meeting",
+    "type": "BTS",
+    "date": "2026-03-05",
+    "location": "Design Room",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "05-03 VARG 2 Ergo Test Design Room",
+    "type": "BTS",
+    "date": "2026-03-05",
+    "location": "Design Room",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "04-03 Day In The Life Mateusz Outtake",
+    "type": "BTS",
+    "date": "2026-03-04",
+    "location": "Office",
+    "used": false,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "04-03 Traction Control Paul Updates",
+    "type": "BTS",
+    "date": "2026-03-04",
+    "location": "Office",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "04-03 TOYBOX Bio Pallet and Battery Base Plate Samples",
+    "type": "BTS",
+    "date": "2026-03-04",
+    "location": "Office",
+    "used": false,
+    "subject": "TOYBOX",
+    "color_rgb": "FFA2C4C9"
+  },
+  {
+    "clip": "04-03 VARG 2 Updates with Paul",
+    "type": "BTS",
+    "date": "2026-03-04",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "04-03 Autodromo Track Record Location Check Skoovby",
+    "type": "BTS",
+    "date": "2026-03-04",
+    "location": "Sitges",
+    "used": false,
+    "subject": "AUTODROMO TRACK RECORD",
+    "color_rgb": "FF9900FF"
+  },
+  {
+    "clip": "26-02 Hilario Brakes B-roll",
+    "type": "B-Roll",
+    "date": "2026-02-26",
+    "location": "Workshop",
+    "used": false,
+    "subject": "STARK BRAKES",
+    "color_rgb": "FF741B47"
+  },
+  {
+    "clip": "26-02 Titan Frame Fatigue Test w Arturo",
+    "type": "BTS",
+    "date": "2026-02-26",
+    "location": "Workshop",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "26-02 Varg 2 (Project F) 1st model Design Room",
+    "type": "BTS",
+    "date": "2026-02-26",
+    "location": "Design Room",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "25-02 VARG 2 Dummy Frame Ergo",
+    "type": "BTS",
+    "date": "2026-02-25",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "25-02 Filming Bike Progress",
+    "type": "BTS",
+    "date": "2026-02-25",
+    "location": "Office",
+    "used": false,
+    "subject": "STARK STUDIOS",
+    "color_rgb": "FFD9D9D9"
+  },
+  {
+    "clip": "22-02 MX Sunday",
+    "type": "BTS",
+    "date": "2026-02-22",
+    "location": "Office",
+    "used": true,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "19-02 Autodromo Track Record Rivendell Presentation Meeting",
+    "type": "BTS",
+    "date": "2026-02-19",
+    "location": "Office",
+    "used": false,
+    "subject": "AUTODROMO TRACK RECORD",
+    "color_rgb": "FF9900FF"
+  },
+  {
+    "clip": "19-02 VARG 2 KIKE B-Roll and Power Unit Chat",
+    "type": "B-Roll",
+    "date": "2026-02-19",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "19-02 Day In The Life Mix",
+    "type": "BTS",
+    "date": "2026-02-19",
+    "location": "Office",
+    "used": true,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "19-02 TOYBOX Jon Dani Jordi Design Room Meeting Brainstorm",
+    "type": "BTS",
+    "date": "2026-02-19",
+    "location": "Office",
+    "used": false,
+    "subject": "TOYBOX",
+    "color_rgb": "FFA2C4C9"
+  },
+  {
+    "clip": "18-02 TOYBOX Jon Carlos Meeting discussing Option A and B",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "TOYBOX",
+    "color_rgb": "FFA2C4C9"
+  },
+  {
+    "clip": "18-02 VARG 2 Paul old and new Motor-Inverter-Gearing comparison",
+    "type": "B-Roll",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "18-02 VARG 2 Engineers Battery Meeting Development Marc Subframe Ferran Paul Estella Radiator Fan Housing",
+    "type": "B-Roll",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "18-02 DOWNHILL SHOWDOWN Aleix explains the challenge in the office",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "DOWNHILL SHOWDOWN",
+    "color_rgb": "FFCBFF45"
+  },
+  {
+    "clip": "18-02 ALG Aerodynamics Roadblock Issue Paul Anton Engineers",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "18-02 ALG Kike Ergo Dumb Dummy Funny",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "18-02 Day In The Life INTRO Aurora",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": true,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "18-02 Day In The Life Mix - Lucas Legolas Sandro Paul Restaurant Aurora Kimi",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "18-02 Day In The Life Aleix Aluminum Fracture Test Results and Arturo Titan Frame Stress Test",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Office",
+    "used": false,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "18-02 Racing-to-Production VARG 1 Radiator Holder",
+    "type": "BTS",
+    "date": "2026-02-18",
+    "location": "Racing",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "17-02 Racing-to-Production VARG 1 Radiator Holder",
+    "type": "BTS",
+    "date": "2026-02-17",
+    "location": "Racing",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "17-02 Day In The Life - Mix Legolas Restaurant Racing",
+    "type": "BTS",
+    "date": "2026-02-17",
+    "location": "Office",
+    "used": false,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "17-02 ALG RALLY preparation Martin showing roadbook and map 2026",
+    "type": "BTS",
+    "date": "2026-02-17",
+    "location": "Office",
+    "used": false,
+    "subject": "MARTIN'S RALLY",
+    "color_rgb": "FF6AA84F"
+  },
+  {
+    "clip": "17-02 VARG 2 Paul Motor Sensor Issue B-Roll",
+    "type": "B-Roll",
+    "date": "2026-02-17",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "17-02 VARG 2 Quick B-Roll Engeneers",
+    "type": "B-Roll",
+    "date": "2026-02-17",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "16-02 MOTOTHERAPY De Wolf Everts Boots and Plates",
+    "type": "BTS",
+    "date": "2026-02-16",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "16-02 VARG 2 Paul chat Engeneers battery case",
+    "type": "B-Roll",
+    "date": "2026-02-16",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "16-02 VARG 2 Radiator Development with Estella",
+    "type": "BTS",
+    "date": "2026-02-16",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "16-02 VARG 2 Frame and Juicebox Development",
+    "type": "BTS",
+    "date": "2026-02-16",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "16-02 ALG Jack Design Shapes Development",
+    "type": "BTS",
+    "date": "2026-02-16",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "09-02 Kart 2.0 Building Workshop and Test",
+    "type": "BTS",
+    "date": "2026-02-09",
+    "location": "Workshop",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "08-02 Kart 2.0 Building Workshop",
+    "type": "BTS",
+    "date": "2026-02-08",
+    "location": "Workshop",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "05-02 Mototerapia Morgan and Ben Chat",
+    "type": "BTS",
+    "date": "2026-02-05",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "05-02 Autodromo Track Record Meeting DC",
+    "type": "BTS",
+    "date": "2026-02-05",
+    "location": "Office",
+    "used": false,
+    "subject": "AUTODROMO TRACK RECORD",
+    "color_rgb": "FF9900FF"
+  },
+  {
+    "clip": "2025-12-19 00:00:00",
+    "type": "2025-12-18 00:00:00",
+    "date": "2025-12-17",
+    "location": "2025-12-20 00:00:00",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "17-12 VARG 2 Design Body Work Federico Jack Martin",
+    "type": "BTS",
+    "date": "2025-12-17",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "17-12 LO Pasha early sketches",
+    "type": "BTS",
+    "date": "2025-12-17",
+    "location": "Office",
+    "used": false,
+    "subject": "LO STREET BIKE",
+    "color_rgb": "FF20124D"
+  },
+  {
+    "clip": "17-12 TOYBOX Jon Quick Update",
+    "type": "BTS",
+    "date": "2025-12-17",
+    "location": "Office",
+    "used": false,
+    "subject": "TOYBOX",
+    "color_rgb": "FFA2C4C9"
+  },
+  {
+    "clip": "17-12 STUDIOS Syo Update",
+    "type": "BTS",
+    "date": "2025-12-17",
+    "location": "Office",
+    "used": false,
+    "subject": "STARK STUDIOS",
+    "color_rgb": "FFD9D9D9"
+  },
+  {
+    "clip": "17-12 ALG Design Quick B-Roll",
+    "type": "B-Roll",
+    "date": "2025-12-17",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "17-12 DEUS Collab Meeting Ben Dani Jack",
+    "type": "BTS",
+    "date": "2025-12-17",
+    "location": "Office",
+    "used": false,
+    "subject": "DEUS - WHEELS & WAVES",
+    "color_rgb": "FF10E9C3"
+  },
+  {
+    "clip": "17-12 BILBAO JOIN THE ACTION Dani Miki explain (SuperEnduro)",
+    "type": "BTS",
+    "date": "2025-12-17",
+    "location": "Office",
+    "used": false,
+    "subject": "JOIN THE ACTION",
+    "color_rgb": "FFFF8442"
+  },
+  {
+    "clip": "16-12 KART Sete Gibernau Test Dani Pedrosa",
+    "type": "BTS",
+    "date": "2025-12-16",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "15-12 KART Monday Progress",
+    "type": "BTS",
+    "date": "2025-12-15",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "14-12 KART Sunday Progress",
+    "type": "BTS",
+    "date": "2025-12-14",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "13-12 KART Saturday Progress",
+    "type": "BTS",
+    "date": "2025-12-13",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "13-12 SM Bikes Stuck at Ground Floor",
+    "type": "BTS",
+    "date": "2025-12-13",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "10-12 CHILE Record Controversy",
+    "type": "Meeting",
+    "date": "2025-12-10",
+    "location": "Office",
+    "used": false,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "10-12 VARG 2 B-ROLL shot 3D Model",
+    "type": "BTS",
+    "date": "2025-12-10",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "10-12 KART Kike Motor Support Parts",
+    "type": "B-Roll",
+    "date": "2025-12-10",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "10-12 B-ROLL BOSCH Collaboration First Meeting",
+    "type": "B-Roll",
+    "date": "2025-12-10",
+    "location": "Office",
+    "used": false,
+    "subject": "BOSCH Collaboration",
+    "color_rgb": "FFA4C2F4"
+  },
+  {
+    "clip": "10-12 SKUGGA Meeting Update on parts Syo and Prototypes",
+    "type": "BTS",
+    "date": "2025-12-10",
+    "location": "Office",
+    "used": false,
+    "subject": "STARK STUDIOS",
+    "color_rgb": "FFD9D9D9"
+  },
+  {
+    "clip": "01-12 Chile Update World Record",
+    "type": "Meeting",
+    "date": "2025-12-01",
+    "location": "Office",
+    "used": false,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "01-12 Manu call B-roll quick",
+    "type": "B-Roll",
+    "date": "2025-12-01",
+    "location": "Office",
+    "used": false,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "01-12 Custmer Support B-Roll",
+    "type": "B-Roll",
+    "date": "2025-12-01",
+    "location": "Office",
+    "used": false,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "01-12 Kart Drawing on CAD office",
+    "type": "BTS",
+    "date": "2025-12-01",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "27-11 OKR ITWs",
+    "type": "BTS",
+    "date": "2025-11-27",
+    "location": "Office",
+    "used": false,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "26-11 Leadership Meeting",
+    "type": "BTS",
+    "date": "2025-11-26",
+    "location": "Office",
+    "used": false,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "25-11 Office Pan Shots",
+    "type": "B-Roll",
+    "date": "2025-11-25",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "25-11 XMAS Anton Marc Pasha David Lunch Meeting",
+    "type": "BTS",
+    "date": "2025-11-25",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "25-11 VARG 2 Charging Port Positioning Issue Paul Martin Jack Meeting",
+    "type": "BTS",
+    "date": "2025-11-25",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "25-11 OKR B-ROLL Angela Kimi",
+    "type": "B-Roll",
+    "date": "2025-11-25",
+    "location": "Office",
+    "used": false,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "25-11 Altitude World Record - Battery Temperature Test",
+    "type": "BTS",
+    "date": "2025-11-25",
+    "location": "Office",
+    "used": true,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "24-11 To the summit catch up",
+    "type": "Meeting",
+    "date": "2025-11-24",
+    "location": "Office",
+    "used": true,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "24-11 E-Brake Test Polea Kelana",
+    "type": "BTS",
+    "date": "2025-11-24",
+    "location": "Polea",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "24-11 E-Brake Test officina",
+    "type": "BTS",
+    "date": "2025-11-24",
+    "location": "Racing Workshop",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "24-11 Kart First Look",
+    "type": "BTS",
+    "date": "2025-11-24",
+    "location": "Racing Workshop",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFFFE599"
+  },
+  {
+    "clip": "24-11 Daily Backpack Charger",
+    "type": "BTS",
+    "date": "2025-11-24",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "22-11 MARTIN Rally Stark",
+    "type": "BTS",
+    "date": "2025-11-22",
+    "location": "",
+    "used": true,
+    "subject": "MARTIN'S RALLY",
+    "color_rgb": "FF6AA84F"
+  },
+  {
+    "clip": "20-11 Daily Backpack charger Meeting",
+    "type": "BTS",
+    "date": "2025-11-20",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "20-11 Auction Mototherapy Meeting Morgan Ben Dani",
+    "type": "BTS",
+    "date": "2025-11-20",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "20-11 Establishing Shots Office R&D",
+    "type": "B-Roll",
+    "date": "2025-11-20",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "20-11 B-ROLL DESIGNERS Martin Jack -Ivona-",
+    "type": "B-Roll",
+    "date": "2025-11-20",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "20-11 B-ROLL Matteo Cellerino Designer",
+    "type": "B-Roll",
+    "date": "2025-11-20",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "20-11 B-ROLL Backpack Charger Paul Engeneers",
+    "type": "B-Roll",
+    "date": "2025-11-20",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "19-11 Kimi in the office OKR",
+    "type": "BTS",
+    "date": "2025-11-19",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "19-11 Backpack Charger Test and Updates",
+    "type": "BTS",
+    "date": "2025-11-19",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "19-11 Aurora Talking with Sales Team",
+    "type": "BTS",
+    "date": "2025-11-19",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "18-11 Designer talking about the Varg 2 Swingarm",
+    "type": "BTS",
+    "date": "2025-11-18",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "18-11 Altitude World Record - Dani Checking fot the Temperature Test",
+    "type": "BTS",
+    "date": "2025-11-18",
+    "location": "Office",
+    "used": true,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "18-11 Altitude World Record - Follow up Meeting",
+    "type": "BTS",
+    "date": "2025-11-18",
+    "location": "Office",
+    "used": true,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "18-11 B-Roll Kimi at his Desk",
+    "type": "B-Roll",
+    "date": "2025-11-18",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "18-11 Kimi Aurora Order Managment Meeting",
+    "type": "BTS",
+    "date": "2025-11-18",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "18-11 Aftersales & Dennis meeting",
+    "type": "BTS",
+    "date": "2025-11-18",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "18-11 Backpack Charger Tests",
+    "type": "BTS",
+    "date": "2025-11-18",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "07-11 TITAN BRAKES Anton Paul Hilario MEETING",
+    "type": "BTS",
+    "date": "2025-11-17",
+    "location": "Office",
+    "used": false,
+    "subject": "STARK BRAKES",
+    "color_rgb": "FF741B47"
+  },
+  {
+    "clip": "17-11 Backpack Charger Prod Issues + Anton",
+    "type": "BTS",
+    "date": "2025-11-17",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "17-11 ALG Designer Working B-Roll",
+    "type": "B-Roll",
+    "date": "2025-11-17",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "17-11 Customer Support Call - Fede Manu",
+    "type": "BTS",
+    "date": "2025-11-17",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "17-11 OKR Aftersales weekly kick-off",
+    "type": "BTS",
+    "date": "2025-11-17",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "12-11 Hilario and Pasha Talking Titanium Brake Test",
+    "type": "BTS",
+    "date": "2025-11-12",
+    "location": "Office",
+    "used": false,
+    "subject": "STARK BRAKES",
+    "color_rgb": "FF741B47"
+  },
+  {
+    "clip": "12-11 Leadership Meeting",
+    "type": "BTS",
+    "date": "2025-11-12",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "12-11 Manu Training Support B-roll",
+    "type": "B-Roll",
+    "date": "2025-11-12",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "11-11 Polea Titanium Frame and Brake test",
+    "type": "BTS",
+    "date": "2025-11-11",
+    "location": "Polea",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "11-11 Titan Swingarm Stress Test Update",
+    "type": "BTS",
+    "date": "2025-11-11",
+    "location": "Office",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "11-11 Summit Call Dealer Chile",
+    "type": "BTS",
+    "date": "2025-11-11",
+    "location": "Office",
+    "used": true,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "11-11 Summit WR Meeting Rivendell",
+    "type": "BTS",
+    "date": "2025-11-11",
+    "location": "Office",
+    "used": true,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "11-11 Summit Call Media",
+    "type": "BTS",
+    "date": "2025-11-11",
+    "location": "Office",
+    "used": true,
+    "subject": "TO THE SUMMIT - CHILE",
+    "color_rgb": "FFD9D2E9"
+  },
+  {
+    "clip": "09-11 Gibernau Test Day",
+    "type": "BTS",
+    "date": "2025-11-09",
+    "location": "Gibernau's Track",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFF3F3F3"
+  },
+  {
+    "clip": "07-11 ALG B-ROLL Designer Drawing",
+    "type": "B-Roll",
+    "date": "2025-11-07",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "07-11 TOYBOX Carlos Update",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "Stark",
+    "used": false,
+    "subject": "TOYBOX",
+    "color_rgb": "FFA2C4C9"
+  },
+  {
+    "clip": "07-11 TITAN Swingarm and Breaks Stress Test",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "Stark",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "07-11 TITAN Frame Quick Update and Kian Coffee Funny",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "Stark",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "07-11 VARG Light Development and Dildicators Update and OKR",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "07-11 Backpack Charger Progress",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "Office",
+    "used": false,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "07-11 VARG Firmware Progress",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "R&D",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "07-11 B-ROLL Shot Jack Federico Walking - VARG 2 Iria Quick Shot",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "R&D",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "07-11 VARG 2 Radiator Development and FRAME Development and simulation",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "07-11 VARG 2 Subframe Development",
+    "type": "B-Roll",
+    "date": "2025-11-07",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "07-11 VARG 2 Engine Vibration Simulations",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "07-11 VARG 2 Frame Development",
+    "type": "B-Roll",
+    "date": "2025-11-07",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "07-11 OKR Angela Quick Chat and Federico Jack Coffee Funny",
+    "type": "BTS",
+    "date": "2025-11-07",
+    "location": "Office",
+    "used": false,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "06-11 Piedmont Visit",
+    "type": "BTS",
+    "date": "2025-11-06",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "06-11 OKR IT B-ROLL",
+    "type": "BTS",
+    "date": "2025-11-06",
+    "location": "Office",
+    "used": false,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "06-11 Cust Satisfaction - Alignment MEETING",
+    "type": "BTS",
+    "date": "2025-11-06",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "05-11 TRACTION CONTROL Intro MEETING",
+    "type": "BTS",
+    "date": "2025-11-05",
+    "location": "Office",
+    "used": true,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "05-11 Bambu Lab B-ROLL",
+    "type": "BTS",
+    "date": "2025-11-05",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "04-11 JON Quick Update Rear Fender Developement",
+    "type": "BTS",
+    "date": "2025-11-04",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF76A5AF"
+  },
+  {
+    "clip": "04-11 GIMLI Platform Quick Meeting",
+    "type": "BTS",
+    "date": "2025-11-04",
+    "location": "Stark",
+    "used": false,
+    "subject": "GIMLI",
+    "color_rgb": "FFEAD1DC"
+  },
+  {
+    "clip": "04-11 XMAS Mark Ingacio Order & Olle Olsson Former CCO",
+    "type": "BTS",
+    "date": "2025-11-04",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "04-11 Bambu Lab B-ROLL",
+    "type": "BTS",
+    "date": "2025-11-04",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "04-11 B-ROLL Morgan Cream Klinga",
+    "type": "BTS",
+    "date": "2025-11-04",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "04-11 ALG Engineers B-ROLL",
+    "type": "B-Roll",
+    "date": "2025-11-04",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "04-11 ALG Paul Quick Chat Engineers Spanish",
+    "type": "BTS",
+    "date": "2025-11-04",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "03-11 VARG 2 Jack Federico B-Roll",
+    "type": "B-Roll",
+    "date": "2025-11-03",
+    "location": "Office",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "03-11 LO Pasha designing B-Roll",
+    "type": "B-Roll",
+    "date": "2025-11-03",
+    "location": "Office",
+    "used": false,
+    "subject": "LO STREET BIKE",
+    "color_rgb": "FF20124D"
+  },
+  {
+    "clip": "03-11 JON Rear Fender New Mold Quick Update",
+    "type": "BTS",
+    "date": "2025-11-03",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF76A5AF"
+  },
+  {
+    "clip": "03-11 B-ROLL Office Random Slow Shutter",
+    "type": "BTS",
+    "date": "2025-11-03",
+    "location": "R&D",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "03-11 ALG P1 First Test Preparation Meeting",
+    "type": "BTS",
+    "date": "2025-11-03",
+    "location": "Office",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "03-11 OKR Angela Update",
+    "type": "BTS",
+    "date": "2025-11-03",
+    "location": "Office",
+    "used": false,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "03-11 OKR Website News Page Meeting",
+    "type": "BTS",
+    "date": "2025-11-03",
+    "location": "Moria",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "31-10 Monthly Meeting Oct",
+    "type": "BTS",
+    "date": "2025-10-31",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "31-10 Bambu Lab B-ROLL SM Phone Cover",
+    "type": "BTS",
+    "date": "2025-10-31",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "31-10 Bambu Lab SM Triple Clamp",
+    "type": "BTS",
+    "date": "2025-10-31",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "31-10 VARG 2 Davide Engine Developement",
+    "type": "BTS",
+    "date": "2025-10-31",
+    "location": "R&D",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "31-10 VARG 2 Federico Design Frame Shape",
+    "type": "BTS",
+    "date": "2025-10-31",
+    "location": "R&D",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "31-10 XMAS Update",
+    "type": "BTS",
+    "date": "2025-10-31",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "30-10 XMAS Update",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "30-10 VARG 2 Jack Design Quick Update",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "R&D",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "30-10 VARG 2 Frame Aleix Update",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "R&D",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "30-10 VARG 2 Davide Engine Developement",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "R&D",
+    "used": false,
+    "subject": "PROJECT F",
+    "color_rgb": "FF980000"
+  },
+  {
+    "clip": "30-10 MIX Ben WSX Post, Pasha Charger Handle",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "Office",
+    "used": false,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "30-10 New Cableless Throttle Handle",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF76A5AF"
+  },
+  {
+    "clip": "30-10 Jon Update and TOYBOX introduction",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "Stark",
+    "used": false,
+    "subject": "TOYBOX",
+    "color_rgb": "FFA2C4C9"
+  },
+  {
+    "clip": "30-10 Engineers Side Slow Shutter Transitions",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "R&D",
+    "used": false,
+    "subject": "DESTINATION",
+    "color_rgb": "FF38761D"
+  },
+  {
+    "clip": "30-10 ALG JuiceBox Engineer Quick Update",
+    "type": "BTS",
+    "date": "2025-10-30",
+    "location": "R&D",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "29-10 CUSTOMER SATISFACTION - Anton about Layoffs",
+    "type": "BTS",
+    "date": "2025-10-29",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFBCBD1A"
+  },
+  {
+    "clip": "29-10 Stark Studios BTS Bike Wash",
+    "type": "BTS",
+    "date": "2025-10-29",
+    "location": "STUDIOS",
+    "used": false,
+    "subject": "STARK STUDIOS",
+    "color_rgb": "FFD9D9D9"
+  },
+  {
+    "clip": "29-10 ALG Engineers working on the firts prototype FX3",
+    "type": "BTS",
+    "date": "2025-10-29",
+    "location": "R&D",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "22-10 Pasha B-ROLL",
+    "type": "BTS",
+    "date": "2025-10-22",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "15-10 First SM Production",
+    "type": "BTS",
+    "date": "2025-10-15",
+    "location": "Office",
+    "used": true,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "14-10 Moto Therapy at Hospital",
+    "type": "BTS",
+    "date": "2025-10-14",
+    "location": "Lleida",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "13-10 Dani Tickets Office",
+    "type": "BTS",
+    "date": "2025-10-13",
+    "location": "Office",
+    "used": true,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "13-10 ITW Antonio Navas about Moto Therapy",
+    "type": "Interview",
+    "date": "2025-10-13",
+    "location": "Lleida",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFEC58EC"
+  },
+  {
+    "clip": "07-10 Launch Meeting New Models and updates",
+    "type": "BTS",
+    "date": "2025-10-07",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "07-10 ALG Adventure Bike First Prototype Assembly",
+    "type": "BTS",
+    "date": "2025-10-07",
+    "location": "R&D",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "06-10 ALG Adventure Bike First Prototype Assembly",
+    "type": "BTS",
+    "date": "2025-10-06",
+    "location": "R&D",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "03-10 Battery Skid Plate Impact Test",
+    "type": "BTS",
+    "date": "2025-10-03",
+    "location": "Workshop",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "01-10 Leadership Meeting - Layoffs",
+    "type": "BTS",
+    "date": "2025-10-01",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "30-09 Stark Sender AUS Rush",
+    "type": "BTS",
+    "date": "2025-09-30",
+    "location": "AUS",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "24-09 SM Shooting NIght",
+    "type": "BTS",
+    "date": "2025-09-23",
+    "location": "BARCELONA",
+    "used": true,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "23-09 SM LAUNCH Autodromo Sitges",
+    "type": "BTS",
+    "date": "2025-09-23",
+    "location": "Autodrome Sitges",
+    "used": true,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "23-09 Paul Soucy and Childrens at Stark",
+    "type": "BTS",
+    "date": "2025-09-23",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "23-09 MugGate Ending Shots",
+    "type": "B-Roll",
+    "date": "2025-09-23",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "23-09 Anton Talking Head WEBINAR SM LAUNCH Autodromo Sitges",
+    "type": "Interview",
+    "date": "2025-09-23",
+    "location": "Autodrome Sitges",
+    "used": true,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "23-09 ALG Adventure Bike First Partial Assembly",
+    "type": "BTS",
+    "date": "2025-09-23",
+    "location": "R&D",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "SM Day 1",
+    "type": "BTS",
+    "date": "2025-09-22",
+    "location": "",
+    "used": true,
+    "subject": "BACKPACK CHARGER",
+    "color_rgb": "FFFF9900"
+  },
+  {
+    "clip": "22-09 MugGATE",
+    "type": "BTS",
+    "date": "2025-09-22",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "18-09 Titan Concept Meeting 2",
+    "type": "BTS",
+    "date": "2025-09-18",
+    "location": "Factory",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "18-09 Titan Frame Load Test",
+    "type": "BTS",
+    "date": "2025-09-18",
+    "location": "Factory",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "ROMANIACS Meeting Morgan Lucas",
+    "type": "BTS",
+    "date": "2025-09-17",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "16-09 Stark Issues Support Call Delaer Bike Fix",
+    "type": "BTS",
+    "date": "2025-09-16",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "15-09 Studios Tour-Config Shooting",
+    "type": "BTS",
+    "date": "2025-09-15",
+    "location": "Stark Studios",
+    "used": false,
+    "subject": "STARK STUDIOS",
+    "color_rgb": "FFD9D9D9"
+  },
+  {
+    "clip": "10-09 Titan Frame Mesuring",
+    "type": "B-Roll",
+    "date": "2025-09-10",
+    "location": "Factory",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "Titan Frame 1st Sample Check",
+    "type": "BTS",
+    "date": "2025-09-08",
+    "location": "OFFICE",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "Vince Friese Media Meeting",
+    "type": "BTS",
+    "date": "2025-09-03",
+    "location": "Office",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "02-09 Stark Office Anton Est Shots",
+    "type": "B-Roll",
+    "date": "2025-09-02",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Factory Outside Est Shots\nStark Office Anton Est Shots",
+    "type": "B-Roll",
+    "date": "2025-09-02",
+    "location": "Office",
+    "used": true,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Designers B-Roll ALG and LO",
+    "type": "B-Roll",
+    "date": "2025-09-01",
+    "location": "Office",
+    "used": true,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Engeneers B-Roll Slow Shutter\nSM Tease Shots",
+    "type": "B-Roll",
+    "date": "2025-08-29",
+    "location": "Office/Factory",
+    "used": true,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Vince Friese Polea 1st Test",
+    "type": "BTS",
+    "date": "2025-08-28",
+    "location": "POLEA",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "Vince Friese 1st day at Factory\nIgnacio Q&A on Friese",
+    "type": "BTS",
+    "date": "2025-08-27",
+    "location": "Office - Race Dep",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "14-08 Dani Matt Phone call AFTER Zac Issues Call",
+    "type": "BTS",
+    "date": "2025-08-14",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "DANI Stark Issues call w ZAC Australia",
+    "type": "BTS",
+    "date": "2025-08-14",
+    "location": "Office",
+    "used": true,
+    "subject": "OKR - CUSTOMER SATISFACTION",
+    "color_rgb": "FFB45F06"
+  },
+  {
+    "clip": "USA RACING : ITW ANTON + MORGAN",
+    "type": "Interview",
+    "date": "2025-08-07",
+    "location": "OFFICE",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "29-07 SM First Assembly Tests",
+    "type": "BTS",
+    "date": "2025-07-29",
+    "location": "Stark",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "29-07 Design and Engeneers Adventure Bike 3D Model B-ROLL",
+    "type": "BTS",
+    "date": "2025-07-29",
+    "location": "Stark",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "29-07 ROMANIACS Dinner at Anton's Celebration Racing Team",
+    "type": "BTS",
+    "date": "2025-07-29",
+    "location": "Anton's",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "25-07 XMAS 3D modeling Detached Lense Shots",
+    "type": "BTS",
+    "date": "2025-07-25",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "25-07 XMAS 3D samples Meeting Anton Pasha",
+    "type": "BTS",
+    "date": "2025-07-25",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "25-07 ROADMAP July Monthly Meeting",
+    "type": "BTS",
+    "date": "2025-07-25",
+    "location": "Stark",
+    "used": true,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "25-07 ROADMAP Jack 3D design - Detached Lens Shots",
+    "type": "BTS",
+    "date": "2025-07-25",
+    "location": "Stark",
+    "used": true,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "24-07 Pasha XMAS Present 3D Model",
+    "type": "BTS",
+    "date": "2025-07-24",
+    "location": "Stark",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "24-07 Jack Pasha Paul Anton discuss STREET BIKE Design",
+    "type": "BTS",
+    "date": "2025-07-24",
+    "location": "Stark",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF351C75"
+  },
+  {
+    "clip": "24-07 Backpack Charger - Engeneers Room quick bts",
+    "type": "BTS",
+    "date": "2025-07-24",
+    "location": "Stark",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "Romaniacs Race Week",
+    "type": "Race",
+    "date": "2025-07-22",
+    "location": "",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "ROMANIACS Employees watching the Live of Prologue",
+    "type": "BTS",
+    "date": "2025-07-22",
+    "location": "Stark",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Sweden Eddie's Training/home",
+    "type": "BTS",
+    "date": "2025-07-09",
+    "location": "Sweden",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "TITAN Ilario David brakes sample prints",
+    "type": "BTS",
+    "date": "2025-07-08",
+    "location": "Stark",
+    "used": false,
+    "subject": "STARK BRAKES",
+    "color_rgb": "FF741B47"
+  },
+  {
+    "clip": "STUDIOS Desk building and mirror shots",
+    "type": "BTS",
+    "date": "2025-07-08",
+    "location": "STARK STUDIOS",
+    "used": false,
+    "subject": "STARK STUDIOS",
+    "color_rgb": "FFD9D9D9"
+  },
+  {
+    "clip": "ROMANIACS Custom frame build welding",
+    "type": "BTS",
+    "date": "2025-07-08",
+    "location": "Stark",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Abu Dhabi AX 2025 03-06/07/2025",
+    "type": "BTS",
+    "date": "2025-07-03",
+    "location": "Abu Dhabi",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "ABU DHABI - Mechanics at Stark preparing suspensions",
+    "type": "BTS",
+    "date": "2025-07-02",
+    "location": "Stark",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Adventure Bike Rear Lights Meeting",
+    "type": "BTS",
+    "date": "2025-07-01",
+    "location": "Stark",
+    "used": false,
+    "subject": "ÄLG ADVENTURE BIKE",
+    "color_rgb": "FF93C47D"
+  },
+  {
+    "clip": "Pasha Supermoto Intro",
+    "type": "BTS",
+    "date": "2025-07-01",
+    "location": "Stark",
+    "used": true,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "Dildicators bts - 1 shot of employee working on 3D model",
+    "type": "BTS",
+    "date": "2025-06-30",
+    "location": "Stark",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "Jon Follow up innovation tasks - Bio Plastics",
+    "type": "BTS",
+    "date": "2025-06-30",
+    "location": "Stark",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF76A5AF"
+  },
+  {
+    "clip": "Stark Summer Party",
+    "type": "BTS",
+    "date": "2025-06-27",
+    "location": "PARTYLAND",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Seb ITW about USA Trip",
+    "type": "Interview",
+    "date": "2025-06-26",
+    "location": "Stark",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Neil - His first days, his integration, his background.",
+    "type": "Interview",
+    "date": "2025-06-26",
+    "location": "RIVENDELL",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Dildicators Light Indicators Meeting",
+    "type": "BTS",
+    "date": "2025-06-26",
+    "location": "Stark",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "DESTINATION PYRENESS - Last call Meeting",
+    "type": "Meeting",
+    "date": "2025-06-12",
+    "location": "",
+    "used": true,
+    "subject": "MARTIN'S RALLY",
+    "color_rgb": "FF6AA84F"
+  },
+  {
+    "clip": "ROMANIACS Meeting Lucas Eddie Chat",
+    "type": "BTS",
+    "date": "2025-06-10",
+    "location": "Stark",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "DESTINATION PYRENESS - KICK OFF Meeting",
+    "type": "BTS",
+    "date": "2025-06-05",
+    "location": "Moria",
+    "used": true,
+    "subject": "MARTIN'S RALLY",
+    "color_rgb": "FF6AA84F"
+  },
+  {
+    "clip": "Design - Titan Concept Meeting",
+    "type": "Meeting",
+    "date": "2025-06-04",
+    "location": "Design Room",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "Trophees Office Shots, Ben and Seb Working, B-Roll",
+    "type": "BTS",
+    "date": "2025-06-01",
+    "location": "Stark",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Kelana Jorge BTS at home and Polea",
+    "type": "BTS",
+    "date": "2025-05-29",
+    "location": "Rider's home - Polea",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "New Plastics TEST",
+    "type": "BTS",
+    "date": "2025-05-29",
+    "location": "Polea",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "IPONE meeting",
+    "type": "BTS",
+    "date": "2025-05-27",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Happy Dogs, Anton's stray dog FX3",
+    "type": "BTS",
+    "date": "2025-05-27",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Dustin Humphrey at Stark",
+    "type": "BTS",
+    "date": "2025-05-27",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "MX 1.2 Range Test",
+    "type": "BTS + B-Roll",
+    "date": "2025-05-23",
+    "location": "MX golf",
+    "used": true,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "Varg MX 1.2 Shoot",
+    "type": "BTS + B-Roll",
+    "date": "2025-05-22",
+    "location": "MX golf",
+    "used": true,
+    "subject": "Day In The Life",
+    "color_rgb": "FF9FC5E8"
+  },
+  {
+    "clip": "Studio Tour Syo",
+    "type": "BTS",
+    "date": "2025-05-19",
+    "location": "Studios",
+    "used": false,
+    "subject": "STARK STUDIOS",
+    "color_rgb": "FFD9D9D9"
+  },
+  {
+    "clip": "Polea Test Seb & Kian",
+    "type": "BTS + B-Roll",
+    "date": "2025-05-15",
+    "location": "Polea",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Stark Factory Establishing Shots",
+    "type": "B-Roll",
+    "date": "2025-04-29",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Blackout at Stark",
+    "type": "BTS",
+    "date": "2025-04-28",
+    "location": "Office",
+    "used": false,
+    "subject": "IRIS",
+    "color_rgb": "FF3C78D8"
+  },
+  {
+    "clip": "EX Range Test Ride",
+    "type": "BTS + B-Roll",
+    "date": "2025-04-27",
+    "location": "Polea",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Paul BTS Meeting Engeneers Office",
+    "type": "BTS",
+    "date": "2025-04-24",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "PAUL Morning Ride",
+    "type": "BTS + B-Roll",
+    "date": "2025-04-17",
+    "location": "Sitges",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Tony Masterclass",
+    "type": "BTS",
+    "date": "2025-04-16",
+    "location": "Rivendell",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "Tony Anton Paul Aleix Meeting",
+    "type": "BTS",
+    "date": "2025-04-15",
+    "location": "Rivendell",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "12-24 f4 Office Test Shots",
+    "type": "B-Roll",
+    "date": "2025-04-15",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": null
+  },
+  {
+    "clip": "Seb B-Roll Leaving Office",
+    "type": "BTS + B-Roll",
+    "date": "2025-04-15",
+    "location": "Offices - Car",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Tony and Aleix Test Chat - Engineers B-Roll",
+    "type": "BTS + B-Roll",
+    "date": "2025-04-14",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "Office B-Roll Employee Meeting with gear Ame",
+    "type": "B-Roll",
+    "date": "2025-04-14",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Eli Tomac Flycase Outbound",
+    "type": "B-Roll",
+    "date": "2025-04-14",
+    "location": "Outbound",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Party at Ground Floor Production Line - Dyno Test",
+    "type": "BTS + B-Roll",
+    "date": "2025-04-11",
+    "location": "Ground Floor",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Lucas chat with Operations and Support",
+    "type": "BTS",
+    "date": "2025-04-11",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Polea Frame Test - INTRO EX Struggles",
+    "type": "BTS + B-Roll",
+    "date": "2025-04-10",
+    "location": "Polea",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Dennis Mountain Bike Ride and Home Chill",
+    "type": "BTS + B-Roll",
+    "date": "2025-04-09",
+    "location": "Sitges",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Lucas Amat Birthday Varg",
+    "type": "BTS",
+    "date": "2025-04-04",
+    "location": "Stark",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Racing ROMANIACS Meeting",
+    "type": "BTS",
+    "date": "2025-04-01",
+    "location": "Rivendell",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Lucas BTS Matarò (Seb Call about ROMANIACS)",
+    "type": "BTS",
+    "date": "2025-04-01",
+    "location": "Matarò",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Lucas BTS Matarò (Diving Footage)",
+    "type": "BTS",
+    "date": "2025-04-01",
+    "location": "Matarò",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "EX Outbound Forklift",
+    "type": "BTS + B-Roll",
+    "date": "2025-03-31",
+    "location": "Outbound",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Customer Support Team Audio Call",
+    "type": "Audio",
+    "date": "2025-03-31",
+    "location": "",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Ben BTS Lisa Home DINNER",
+    "type": "BTS",
+    "date": "2025-03-28",
+    "location": "Ben Lisa Home",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Ben BTS Lisa Home DRIVE - AMA RACING call",
+    "type": "BTS",
+    "date": "2025-03-28",
+    "location": "Ben's car",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Ben BTS Lisa Home DRIVE and PARK",
+    "type": "BTS",
+    "date": "2025-03-28",
+    "location": "Ben Lisa Home",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Monthly Meeting",
+    "type": "BTS",
+    "date": "2025-02-28",
+    "location": "Offices",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Woops Testing Marcus Tracking",
+    "type": "BTS",
+    "date": "2025-03-27",
+    "location": "Office",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Weekly Customer Support",
+    "type": "BTS",
+    "date": "2025-03-27",
+    "location": "Rivendell",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Weekly Kimi Anton Dennis",
+    "type": "BTS",
+    "date": "2025-03-26",
+    "location": "Moria",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Launch Meeting",
+    "type": "BTS",
+    "date": "2025-03-26",
+    "location": "Rivendell",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Adventure Bike Meeting Anton Martin Paul Design",
+    "type": "BTS",
+    "date": "2025-03-25",
+    "location": "Rivendell",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FF6D9EEB"
+  },
+  {
+    "clip": "EX Stuck at outbound B-Roll",
+    "type": "B-Roll",
+    "date": "2025-03-25",
+    "location": "Ground Floor",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Skoovby Varg SM Test",
+    "type": "BTS + B-Roll",
+    "date": "2025-03-25",
+    "location": "Parking Lot",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "Martin Design Core Values Briefing",
+    "type": "BTS",
+    "date": "2025-03-24",
+    "location": "Rivendell",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Mechanic working on the bike + bikes in the container",
+    "type": "BTS",
+    "date": "2025-03-24",
+    "location": "Ground Floor",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Racing Weekly Meeting (Roczen Tomac recap)",
+    "type": "BTS",
+    "date": "2025-03-24",
+    "location": "Offices",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "AX Season Catch Up AMA - Stark Future",
+    "type": "BTS",
+    "date": "2025-03-20",
+    "location": "Offices",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Sales Weekly Debrief",
+    "type": "BTS",
+    "date": "2025-03-20",
+    "location": "Isengard",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Whoops Test Data Analysis",
+    "type": "BTS",
+    "date": "2025-03-20",
+    "location": "Offices",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Leaders Meeting Martin Speech",
+    "type": "BTS",
+    "date": "2025-03-19",
+    "location": "Rivendell",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "11-11:30 Delays orders - Sales Department MEETING Negative Feedback",
+    "type": "BTS",
+    "date": "2025-03-19",
+    "location": "Rivendell",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Daily Decisions Prod/Ship with DENNIS",
+    "type": "BTS",
+    "date": "2025-03-19",
+    "location": "Offices + Office @  Ground Floor + Outbound",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "BTS PAUL @ home and driving. Morning track woops testing and Cable CAM slomo shots",
+    "type": "BTS + Action",
+    "date": "2025-03-18",
+    "location": "Polea",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Meeting for Woops testing",
+    "type": "BTS",
+    "date": "2025-03-17",
+    "location": "Office",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Test Michelin Supercross",
+    "type": "BTS + B-Roll",
+    "date": "2025-03-13",
+    "location": "Track Polea Camp",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "EX Bikes Ground Floor Gimbal",
+    "type": "B-Roll",
+    "date": "2025-03-14",
+    "location": "Ground Floor",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "8-8:30PM Paddle Match",
+    "type": "BTS",
+    "date": "2025-03-12",
+    "location": "?",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "11:30-12:30 Launch Committee Filming",
+    "type": "BTS",
+    "date": "2025-03-12",
+    "location": "RIVENDELL",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Customer Support B-Roll",
+    "type": "B-Roll",
+    "date": "2025-03-11",
+    "location": "Offices",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Designers B-Roll - Brake Levers",
+    "type": "BTS",
+    "date": "2025-03-11",
+    "location": "Offices",
+    "used": true,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "EX Stuck at OUTBOUND - NIGHT",
+    "type": "BTS",
+    "date": "2025-03-10",
+    "location": "Ground Floor",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "AFTER Racing Team Meeting AND B-ROLL",
+    "type": "BTS",
+    "date": "2025-03-10",
+    "location": "Office",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Racing Team Meeting, Seb Lucas Eddie",
+    "type": "BTS",
+    "date": "2025-03-10",
+    "location": "Office",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Titanium Footpegs Stress Test",
+    "type": "BTS",
+    "date": "2025-03-10",
+    "location": "TEST AREA",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "Super Enduro - Round 7 (Last Round) (where they got denied admission last year)",
+    "type": "Other",
+    "date": "2025-03-08",
+    "location": "FRANCE / Lievin",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "TITAN Footpegs 3D File Preparation with David",
+    "type": "BTS",
+    "date": "2025-03-07",
+    "location": "David Office",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "EX Stuck at Ground Floor",
+    "type": "B-Roll",
+    "date": "2025-03-07",
+    "location": "Ground Floor",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "11:30 -12:30 Farsoon & Stark Swingarm/frame VIDEOCALL",
+    "type": "BTS",
+    "date": "2025-03-07",
+    "location": "Ground Floor Offices",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "TITAN Printed Titanium Post Processing for specific Textures with David Diaz",
+    "type": "BTS",
+    "date": "2025-03-07",
+    "location": "Ground Floor Offices",
+    "used": false,
+    "subject": "TITAN",
+    "color_rgb": "FF674EA7"
+  },
+  {
+    "clip": "SUPERMOTO Master Cylinder Brake Lever Design",
+    "type": "BTS",
+    "date": "2025-03-07",
+    "location": "Offices",
+    "used": true,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "EV Laptop Charger",
+    "type": "BTS",
+    "date": "2025-03-06",
+    "location": "MORIA Meeting Room",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "AMA Electric BAN - Ben, Morgan, Seb",
+    "type": "BTS",
+    "date": "2025-03-06",
+    "location": "Offices",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "AMA Enduro Cross Visit",
+    "type": "BTS",
+    "date": "2025-03-06",
+    "location": "Offices",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "Dennis and Operations",
+    "type": "BTS",
+    "date": "2025-03-06",
+    "location": "Offices",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "ANDRES Daily shop floor meeting (All spanish)",
+    "type": "BTS",
+    "date": "2025-03-06",
+    "location": "Ground Floor - Bike Line",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Restaurant Girò Del Gorner B-ROLL + Eddie",
+    "type": "BTS",
+    "date": "2025-03-05",
+    "location": "RESTAURANT - Girò Del Gorner",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "2-3 PM Stark Leadership Meeting",
+    "type": "BTS",
+    "date": "2025-03-05",
+    "location": "Offices (big room in front)",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFD5A6BD"
+  },
+  {
+    "clip": "Designers Talk Supermoto Plate Holder",
+    "type": "BTS",
+    "date": "2025-03-05",
+    "location": "Office",
+    "used": true,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "Design room Plastic supplier meeting",
+    "type": "BTS",
+    "date": "2025-03-05",
+    "location": "Design room",
+    "used": false,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "Dennis Talk with IT",
+    "type": "BTS",
+    "date": "2025-03-05",
+    "location": "Office Desk",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Andres Office Production B-Roll (est shots)",
+    "type": "BTS",
+    "date": "2025-03-05",
+    "location": "Office Production Line",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Master Cylinder Brake Test\nFunny - Anton bends license plate",
+    "type": "BTS",
+    "date": "2025-03-05",
+    "location": "Ground Floor SM Dev - Parking Lot",
+    "used": true,
+    "subject": "Racing to Production",
+    "color_rgb": "FFF6B26B"
+  },
+  {
+    "clip": "5 PM Filming Dinner & Hangout",
+    "type": "BTS",
+    "date": "2025-03-04",
+    "location": "RESTAURANT - Girò Del Gorner",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "After Riding BTS WITH EDDIE",
+    "type": "BTS",
+    "date": "2025-03-04",
+    "location": "EDDIE'S HOME - Girò Del Gorner",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "9 AM TEST DAY - SUPER ENDURO with EDDIE",
+    "type": "BTS",
+    "date": "2025-03-04",
+    "location": "Girò Del Gorner's TRACK",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFDD7E6B"
+  },
+  {
+    "clip": "11:30 AM Meeting - Supply Chain",
+    "type": "BTS",
+    "date": "2025-03-04",
+    "location": "ROHAN Meeting Room",
+    "used": false,
+    "subject": "",
+    "color_rgb": "FFB7B7B7"
+  },
+  {
+    "clip": "2-3 PM EX go to market (Dennis & Operations)",
+    "type": "BTS",
+    "date": "2025-03-03",
+    "location": "Offices",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "11AM Ex Bikes stuck + Shipping out the EX + BTS Andres",
+    "type": "BTS",
+    "date": "2025-03-03",
+    "location": "Ground Floor",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  },
+  {
+    "clip": "Monthly Meeting",
+    "type": "BTS",
+    "date": "2025-02-28",
+    "location": "Offices",
+    "used": true,
+    "subject": "",
+    "color_rgb": "FFB6D7A8"
+  }
+]

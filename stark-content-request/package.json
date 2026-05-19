@@ -1,0 +1,10 @@
+{
+  "name": "stark-content-request",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Content request ticketing system for Stark Future",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "resend": "^3.2.0"
+  }
+}
