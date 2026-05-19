@@ -57,10 +57,7 @@ export default async function handler(req, res) {
     const requesterEmail = getColValue(item, COL.requesterEmail);
     const editToken      = getColValue(item, COL.editToken);
 
-    await Promise.all([
-      moveItem(item.id, GROUP.inProduction),
-      updateItem(item.id, { [COL.ticketStatus]: { label: 'Working on it' } }),
-    ]);
+    await moveItem(item.id, GROUP.inProduction);
 
     // Create Notion task
     try { await createNotionTask(item); }
@@ -90,13 +87,10 @@ export default async function handler(req, res) {
     const requesterEmail = getColValue(item, COL.requesterEmail);
     const editToken      = getColValue(item, COL.editToken);
 
-    await Promise.all([
-      moveItem(item.id, GROUP.onHold),
-      updateItem(item.id, {
-        [COL.ticketStatus]:    { label: 'Stuck' },
-        [COL.rejectionReason]: { text: reason || '' },
-      }),
-    ]);
+    await moveItem(item.id, GROUP.onHold);
+    await updateItem(item.id, {
+      [COL.rejectionReason]: { text: reason || '' },
+    });
 
     if (requesterEmail && editToken) {
       await sendRejected({
