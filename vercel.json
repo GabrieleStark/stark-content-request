@@ -1,4 +1,10 @@
 {
   "version": 2,
-  "cleanUrls": true
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "handle": "filesystem" },
+    { "src": "/track(.*)", "dest": "/track.html" },
+    { "src": "/reject(.*)", "dest": "/reject.html" },
+    { "src": "/edit(.*)", "dest": "/edit.html" }
+  ]
 }
