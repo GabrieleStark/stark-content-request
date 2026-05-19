@@ -94,7 +94,8 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
 }
 
 export async function sendApproved({ to, summary, itemId }) {
-  await resend.emails.send({
+  console.log('[sendApproved] FROM:', FROM, '| TO:', to, '| RESEND_KEY set:', !!process.env.RESEND_API_KEY);
+  const result = await resend.emails.send({
     from:    FROM,
     to,
     subject: `✅ Request approved — ${summary}`,
@@ -113,6 +114,7 @@ export async function sendApproved({ to, summary, itemId }) {
       </div>
     `,
   });
+  console.log('[sendApproved] Resend response:', JSON.stringify(result));
 }
 
 export async function sendRejected({ to, summary, itemId, reason, editToken }) {
