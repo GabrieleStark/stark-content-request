@@ -18,7 +18,7 @@ export async function sendConfirmation({ to, name, itemId, summary }) {
         <div style="background:#f5f5f5;border-radius:8px;padding:16px 20px;margin:24px 0;font-size:14px">
           <strong>${summary}</strong>
         </div>
-        <a href="${APP}/track?id=${itemId}"
+        <a href="${APP}/track.html?id=${itemId}"
            style="display:inline-block;background:#111;color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px">
           Track your request →
         </a>
@@ -33,7 +33,7 @@ export async function sendConfirmation({ to, name, itemId, summary }) {
 export async function sendApprovalRequest({ itemId, summary, data, approveToken }) {
   const base       = `${APP}/api/approve?token=${approveToken}`;
   const approveUrl = `${base}&action=approve`;
-  const rejectUrl  = `${APP}/reject?token=${approveToken}`;
+  const rejectUrl  = `${APP}/reject.html?token=${approveToken}`;
 
   const rows = [
     ['Format',       data.format + (data.videoFormat ? ` · ${data.videoFormat}` : '')],
@@ -98,7 +98,7 @@ export async function sendApproved({ to, summary, itemId }) {
         <div style="background:#f5f5f5;border-radius:8px;padding:16px 20px;margin:24px 0;font-size:14px">
           <strong>${summary}</strong>
         </div>
-        <a href="${APP}/track?id=${itemId}"
+        <a href="${APP}/track.html?id=${itemId}"
            style="display:inline-block;background:#111;color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px">
           Track progress →
         </a>
@@ -124,7 +124,7 @@ export async function sendRejected({ to, summary, itemId, reason, editToken }) {
           ${reason || 'No reason provided.'}
         </div>
         <p style="font-size:14px;color:#555">You can edit your request and resubmit — Amedeo will review it again.</p>
-        <a href="${APP}/edit?token=${editToken}"
+        <a href="${APP}/edit.html?token=${editToken}"
            style="display:inline-block;background:#111;color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px;margin-top:8px">
           ✏️ Edit and resubmit →
         </a>

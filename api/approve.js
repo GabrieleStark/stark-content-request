@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 
     // Already processed?
     if (item.group.id !== GROUP.inReview) {
-      return res.redirect(`${process.env.APP_URL}/track?id=${item.id}&msg=already_processed`);
+      return res.redirect(`${process.env.APP_URL}/track.html?id=${item.id}&msg=already_processed`);
     }
 
     const requesterEmail = getColValue(item, COL.requesterEmail);
@@ -73,7 +73,7 @@ export default async function handler(req, res) {
     }
 
     // Redirect Amedeo to a confirmation page
-    return res.redirect(`${process.env.APP_URL}/track?id=${item.id}&msg=approved`);
+    return res.redirect(`${process.env.APP_URL}/track.html?id=${item.id}&msg=approved`);
   }
 
   // ── POST: reject action ──────────────────────────────────────────────
