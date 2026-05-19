@@ -18,8 +18,8 @@ function makeRow(label, value) {
     type: 'bulleted_list_item',
     bulleted_list_item: {
       rich_text: [
-        { text: { content: `${label}: `, annotations: { bold: true } } },
-        { text: { content: String(value) } },
+        { type: 'text', text: { content: `${label}: ` }, annotations: { bold: true } },
+        { type: 'text', text: { content: String(value) } },
       ],
     },
   };
