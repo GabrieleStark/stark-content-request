@@ -118,25 +118,24 @@ export default async function handler(req, res) {
 
     await moveItem(item.id, GROUP.inProduction);
 
-    // Create Notion task
-    try { await createNotionTask(item); }
-    catch (e) { console.error('Notion task creation failed:', e); }
+    // Run Notion + email in parallel to stay within function timeout
+    console.log('[approve] starting parallel tasks, requesterEmail:', requesterEmail);
+    const results = await Promise.allSettled([
+      createNotionTask(item),
+      requesterEmail
+        ? sendApproved({ to: requesterEmail, summary: item.name, itemId: item.id })
+        : Promise.resolve(),
+    ]);
 
-    // Email requester
-    console.log('[approve] requesterEmail:', requesterEmail);
-    if (requesterEmail) {
-      try {
-        await sendApproved({
-          to:      requesterEmail,
-          summary: item.name,
-          itemId:  item.id,
-        });
-        console.log('[approve] confirmation email sent to:', requesterEmail);
-      } catch (emailErr) {
-        console.error('[approve] confirmation email failed:', emailErr);
-      }
+    if (results[0].status === 'rejected') {
+      console.error('[approve] Notion failed:', results[0].reason);
     } else {
-      console.warn('[approve] no requesterEmail found, skipping confirmation email');
+      console.log('[approve] Notion task created');
+    }
+    if (results[1].status === 'rejected') {
+      console.error('[approve] email failed:', results[1].reason);
+    } else {
+      console.log('[approve] confirmation email sent to:', requesterEmail);
     }
 
     // Redirect Amedeo to a confirmation page
