@@ -123,12 +123,20 @@ export default async function handler(req, res) {
     catch (e) { console.error('Notion task creation failed:', e); }
 
     // Email requester
+    console.log('[approve] requesterEmail:', requesterEmail);
     if (requesterEmail) {
-      await sendApproved({
-        to:      requesterEmail,
-        summary: item.name,
-        itemId:  item.id,
-      }).catch(console.error);
+      try {
+        await sendApproved({
+          to:      requesterEmail,
+          summary: item.name,
+          itemId:  item.id,
+        });
+        console.log('[approve] confirmation email sent to:', requesterEmail);
+      } catch (emailErr) {
+        console.error('[approve] confirmation email failed:', emailErr);
+      }
+    } else {
+      console.warn('[approve] no requesterEmail found, skipping confirmation email');
     }
 
     // Redirect Amedeo to a confirmation page

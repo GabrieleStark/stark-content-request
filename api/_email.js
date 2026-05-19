@@ -31,22 +31,28 @@ export async function sendConfirmation({ to, name, itemId, summary }) {
 }
 
 export async function sendApprovalRequest({ itemId, summary, data, approveToken }) {
-  const base       = `${APP}/api/approve?token=${approveToken}`;
-  const approveUrl = `${base}&action=approve`;
-  const rejectUrl  = `${APP}/reject.html?token=${approveToken}`;
+  const base        = `${APP}/api/approve?token=${approveToken}`;
+  const approveUrl  = `${base}&action=approve`;
+  const rejectUrl   = `${APP}/reject.html?token=${approveToken}`;
+  const description = data.request || summary;
 
   const rows = [
-    ['Format',       data.format + (data.videoFormat ? ` · ${data.videoFormat}` : '')],
-    ['Content Type', data.contentType],
-    ['Distribution', data.distribution],
-    ['Quantity',     data.quantity],
-    ['Deadline',     data.deadline],
-    ['Location',     data.location],
-    ['Bikes',        data.bikesInvolved + (data.whichModels ? ` — ${data.whichModels}` : '')],
-    data.actors             && ['Actors/Riders',     data.actors],
-    data.requester          && ['Requester',          data.requester],
-    data.peopleToCoordinate && ['Coordinate with',   data.peopleToCoordinate],
-    data.notes              && ['Notes',              data.notes],
+    data.priority           && ['Priority',           data.priority],
+    ['Format',                  data.format + (data.videoFormat ? ` · ${data.videoFormat}` : '')],
+    ['Content Type',            data.contentType],
+    ['Distribution',            data.distribution],
+    ['Quantity',                data.quantity],
+    ['Deadline',                data.deadline],
+    ['Location',                data.location],
+    ['Bikes',                   data.bikesInvolved + (data.whichModels ? ` — ${data.whichModels}` : '')],
+    data.actors             && ['Actors/Riders',      data.actors],
+    data.recipient          && ['Recipient',           data.recipient],
+    data.requesterName      && ['Requester',           data.requesterName],
+    data.requesterEmail     && ['Requester Email',     data.requesterEmail],
+    data.peopleToCoordinate && ['Coordinate with',    data.peopleToCoordinate],
+    data.reference          && ['Reference',           data.reference],
+    data.approvalRequired   && ['Approval Required',  data.approvalRequired],
+    data.notes              && ['Notes',               data.notes],
   ].filter(Boolean);
 
   const tableRows = rows.map(([k, v]) =>
@@ -61,7 +67,9 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111">
         <p style="font-size:13px;color:#888;letter-spacing:.1em;text-transform:uppercase">Stark Future · Content Request</p>
         <h2 style="margin:8px 0 4px">New request to review</h2>
-        <p style="font-size:16px;font-weight:600;margin:16px 0 4px">${summary}</p>
+        <div style="background:#f5f5f5;border-radius:8px;padding:14px 18px;margin:16px 0;font-size:14px;line-height:1.5">
+          ${description}
+        </div>
         <table style="margin:16px 0 28px;border-collapse:collapse">${tableRows}</table>
         <table style="border-collapse:collapse">
           <tr>
