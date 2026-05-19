@@ -32,7 +32,7 @@ async function createNotionTask(item) {
   // Properties for the Projects database
   const props = {
     'Name':   { title: richText(name) },
-    'Status': { status: { name: 'Not Started' } },
+    'Status': { status: { name: 'In progress' } },
   };
 
   if (deadline) {
