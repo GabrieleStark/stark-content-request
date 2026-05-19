@@ -90,6 +90,7 @@
     }
 
     input[type="text"],
+    input[type="email"],
     input[type="number"],
     input[type="date"],
     input[type="url"],
@@ -110,6 +111,7 @@
     }
 
     input[type="text"]:focus,
+    input[type="email"]:focus,
     input[type="number"]:focus,
     input[type="date"]:focus,
     input[type="url"]:focus,
@@ -132,6 +134,12 @@
     }
 
     select option { background: #1a1a1a; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
 
     /* Pill toggle (Photo / Video / Mixed) */
     .pill-group {
@@ -253,14 +261,29 @@
     .success p {
       font-size: 14px;
       color: #888;
+      line-height: 1.6;
     }
 
-    .success button {
-      margin-top: 32px;
+    .success .track-link {
+      display: inline-block;
+      margin-top: 24px;
       padding: 12px 28px;
       background: #222;
       color: #f0f0f0;
       border: 1px solid #333;
+      border-radius: 8px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .success button {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px 28px;
+      background: transparent;
+      color: #555;
+      border: 1px solid #222;
       border-radius: 8px;
       font-size: 14px;
       cursor: pointer;
@@ -284,12 +307,30 @@
 <div class="container">
 
   <header>
-    <div class="logo">Stark Future</div>
+    <div class="logo">Stark Future · Content Requests</div>
     <h1>Content Request</h1>
     <p>Fill in the details below and the production team will review your request.</p>
   </header>
 
   <form id="requestForm" novalidate>
+
+    <!-- SECTION: YOUR INFO -->
+    <div class="section-label">Your Info</div>
+
+    <div class="two-col">
+      <div class="field">
+        <label for="requesterName">Your name <span class="required">*</span></label>
+        <input type="text" id="requesterName" name="requesterName" placeholder="e.g. Marco" required />
+        <div class="error-msg" id="err-requesterName">Please enter your name.</div>
+      </div>
+      <div class="field">
+        <label for="requesterEmail">Your email <span class="required">*</span></label>
+        <input type="email" id="requesterEmail" name="requesterEmail" placeholder="you@starkfuture.com" required />
+        <div class="error-msg" id="err-requesterEmail">Please enter a valid email.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
 
     <!-- PRIORITY -->
     <div class="field">
@@ -380,16 +421,17 @@
     <!-- SECTION: LOGISTICS -->
     <div class="section-label">Logistics</div>
 
-    <div class="field">
-      <label for="quantity">Quantity <span class="required">*</span> <span class="hint">Number of assets needed</span></label>
-      <input type="number" id="quantity" name="quantity" min="1" placeholder="e.g. 3" required />
-      <div class="error-msg" id="err-quantity">Please enter a quantity.</div>
-    </div>
-
-    <div class="field">
-      <label for="deadline">Deadline <span class="required">*</span></label>
-      <input type="date" id="deadline" name="deadline" required />
-      <div class="error-msg" id="err-deadline">Please set a deadline.</div>
+    <div class="two-col">
+      <div class="field">
+        <label for="quantity">Quantity <span class="required">*</span> <span class="hint">assets needed</span></label>
+        <input type="number" id="quantity" name="quantity" min="1" placeholder="e.g. 3" required />
+        <div class="error-msg" id="err-quantity">Please enter a quantity.</div>
+      </div>
+      <div class="field">
+        <label for="deadline">Deadline <span class="required">*</span></label>
+        <input type="date" id="deadline" name="deadline" required />
+        <div class="error-msg" id="err-deadline">Please set a deadline.</div>
+      </div>
     </div>
 
     <div class="field">
@@ -436,7 +478,7 @@
     </div>
 
     <div class="field">
-      <label for="requester">Requester <span class="hint">Department, sponsor, dealer…</span></label>
+      <label for="requester">On behalf of <span class="hint">Department, sponsor, dealer…</span></label>
       <input type="text" id="requester" name="requester" placeholder="e.g. Marketing, Dealer Spain, R&D" />
     </div>
 
@@ -451,30 +493,14 @@
     </div>
 
     <div class="field">
-      <label for="reference">Reference / Moodboard</label>
-      <input type="url" id="reference" name="reference" placeholder="https://…" />
-    </div>
-
-    <div class="field">
-      <label>Approval required?</label>
-      <div class="toggle-group">
-        <input type="radio" name="approvalRequired" id="appr-yes" value="Yes" />
-        <label for="appr-yes">Yes</label>
-
-        <input type="radio" name="approvalRequired" id="appr-no" value="No" checked />
-        <label for="appr-no">No</label>
-      </div>
-    </div>
-
-    <div class="field">
       <label for="notes">Notes</label>
       <textarea id="notes" name="notes" placeholder="Anything else the team should know…"></textarea>
     </div>
 
     <!-- SUBMIT -->
     <div class="submit-area">
-      <button type="submit" id="submitBtn">Send Request</button>
-      <p class="submit-note">Your request will appear in Monday automatically.</p>
+      <button type="submit" id="submitBtn">Send Request →</button>
+      <p class="submit-note">Your request goes straight to Amedeo for review.</p>
     </div>
 
   </form>
@@ -483,7 +509,8 @@
   <div class="success" id="successState">
     <div class="check">✅</div>
     <h2>Request sent!</h2>
-    <p>The production team has been notified.<br />You'll hear back soon.</p>
+    <p>Amedeo has been notified and will review your request.<br />You'll get an email once it's approved or if changes are needed.</p>
+    <a id="trackLink" href="#" class="track-link">Track your request →</a>
     <button onclick="resetForm()">Submit another request</button>
   </div>
 
@@ -511,11 +538,13 @@
     let ok = true;
 
     const checks = [
-      { id: 'request',      errId: 'err-request',      check: v => v.trim().length > 0 },
-      { id: 'contentType',  errId: 'err-contentType',  check: v => v !== '' },
-      { id: 'distribution', errId: 'err-distribution', check: v => v !== '' },
-      { id: 'quantity',     errId: 'err-quantity',      check: v => v > 0 },
-      { id: 'deadline',     errId: 'err-deadline',      check: v => v !== '' },
+      { id: 'requesterName',  errId: 'err-requesterName',  check: v => v.trim().length > 0 },
+      { id: 'requesterEmail', errId: 'err-requesterEmail', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+      { id: 'request',        errId: 'err-request',        check: v => v.trim().length > 0 },
+      { id: 'contentType',    errId: 'err-contentType',    check: v => v !== '' },
+      { id: 'distribution',   errId: 'err-distribution',   check: v => v !== '' },
+      { id: 'quantity',        errId: 'err-quantity',       check: v => v > 0 },
+      { id: 'deadline',        errId: 'err-deadline',       check: v => v !== '' },
     ];
 
     checks.forEach(({ id, errId, check }) => {
@@ -528,7 +557,7 @@
     });
 
     // Radio groups
-    ['format', 'location', 'bikesInvolved', 'priority'].forEach(name => {
+    ['format', 'location', 'bikesInvolved'].forEach(name => {
       const selected = document.querySelector(`input[name="${name}"]:checked`);
       const errId = `err-${name === 'bikesInvolved' ? 'bikes' : name}`;
       const err = document.getElementById(errId);
@@ -557,6 +586,8 @@
     btn.textContent = 'Sending…';
 
     const data = {
+      requesterName:      document.getElementById('requesterName').value.trim(),
+      requesterEmail:     document.getElementById('requesterEmail').value.trim(),
       priority:           document.querySelector('input[name="priority"]:checked')?.value,
       request:            document.getElementById('request').value.trim(),
       format:             document.querySelector('input[name="format"]:checked')?.value,
@@ -572,8 +603,6 @@
       requester:          document.getElementById('requester').value.trim() || null,
       recipient:          document.getElementById('recipient').value.trim() || null,
       peopleToCoordinate: document.getElementById('peopleToCoordinate').value.trim() || null,
-      reference:          document.getElementById('reference').value.trim() || null,
-      approvalRequired:   document.querySelector('input[name="approvalRequired"]:checked')?.value,
       notes:              document.getElementById('notes').value.trim() || null,
     };
 
@@ -586,12 +615,19 @@
 
       if (!res.ok) throw new Error('Server error');
 
+      const json = await res.json();
+
+      // Update track link with the returned item ID
+      if (json.itemId) {
+        document.getElementById('trackLink').href = `/track?id=${json.itemId}`;
+      }
+
       document.getElementById('requestForm').style.display = 'none';
       document.getElementById('successState').style.display = 'block';
 
     } catch (err) {
       btn.disabled = false;
-      btn.textContent = 'Send Request';
+      btn.textContent = 'Send Request →';
       alert('Something went wrong. Please try again or contact the production team directly.');
     }
   });
@@ -601,7 +637,7 @@
     document.getElementById('requestForm').style.display = 'block';
     document.getElementById('successState').style.display = 'none';
     document.getElementById('submitBtn').disabled = false;
-    document.getElementById('submitBtn').textContent = 'Send Request';
+    document.getElementById('submitBtn').textContent = 'Send Request →';
     document.querySelectorAll('.conditional').forEach(el => el.classList.remove('visible'));
   }
 </script>
