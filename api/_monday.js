@@ -87,21 +87,22 @@ export async function moveItem(itemId, groupId) {
 export async function getItemByToken(tokenColumnId, token) {
   const data = await mondayQuery(`
     query {
-      items_page(
-        board_id: ${BOARD_ID},
-        limit: 1,
-        query_params: {
-          rules: [{ column_id: "${tokenColumnId}", compare_value: ["${token}"] }]
-        }
-      ) {
-        items {
-          id name group { id title }
-          column_values { id text value }
+      boards(ids: [${BOARD_ID}]) {
+        items_page(
+          limit: 1,
+          query_params: {
+            rules: [{ column_id: "${tokenColumnId}", compare_value: ["${token}"] }]
+          }
+        ) {
+          items {
+            id name group { id title }
+            column_values { id text value }
+          }
         }
       }
     }
   `);
-  return data.items_page?.items?.[0] ?? null;
+  return data.boards?.[0]?.items_page?.items?.[0] ?? null;
 }
 
 export async function getItemById(itemId) {
