@@ -1,163 +1,13 @@
 // api/approve.js
 // GET  /api/approve?token=XXX&action=approve  → approves immediately
 // POST /api/approve  { token, action:'reject', reason } → rejects with reason
+//
+// Notion project creation is handled by the Cowork scheduled task
+// "notion-project-setup", which polls Monday every 15 min for items
+// in "In Production" without a Notion URL and creates them from the template.
 
-import { COL, GROUP, getItemByToken, updateItem, moveItem, getColValue } from './_monday.js';
+import { COL, GROUP, getItemByToken, updateItem, moveItem, getColValue, createUpdate } from './_monday.js';
 import { sendApproved, sendRejected } from './_email.js';
-
-const NOTION_API  = 'https://api.notion.com/v1';
-const NOTION_VER  = '2022-06-28';
-const PROJECTS_DB = '36464f16-cf3f-81a7-bbb3-f4761c94b070'; // Projects database
-const TASKS_DB    = '36464f16-cf3f-81ad-ae40-c9c473f9ba98'; // Tasks database
-
-// Delivery task name by format
-const DELIVERY_TASK = {
-  'Video': 'Video Delivery',
-  'Photo': 'Photo Delivery',
-  'Mixed': 'Delivery',
-};
-
-function notionHeaders() {
-  return {
-    'Authorization':  `Bearer ${process.env.NOTION_API_KEY}`,
-    'Notion-Version': NOTION_VER,
-    'Content-Type':   'application/json',
-  };
-}
-
-function richText(str) {
-  return [{ type: 'text', text: { content: String(str || '').slice(0, 2000) } }];
-}
-
-function heading2(text) {
-  return { type: 'heading_2', heading_2: { rich_text: richText(text) } };
-}
-
-function paragraph(text) {
-  return { type: 'paragraph', paragraph: { rich_text: richText(text) } };
-}
-
-function bulletRow(label, value) {
-  if (!value) return null;
-  return {
-    type: 'bulleted_list_item',
-    bulleted_list_item: {
-      rich_text: [
-        { type: 'text', text: { content: `${label}: ` }, annotations: { bold: true } },
-        { type: 'text', text: { content: String(value) } },
-      ],
-    },
-  };
-}
-
-// ── Create Notion project page ───────────────────────────────────────────────
-async function createNotionProject(item) {
-  const name        = item.name;
-  const deadline    = getColValue(item, COL.deadline);
-  const format      = getColValue(item, COL.format)      || '';
-  const videoFormat = getColValue(item, COL.videoFormat) || '';
-  const contentType = getColValue(item, COL.contentType) || '';
-  const description = getColValue(item, COL.notes)       || name;
-
-  // Map form format → Notion Format multi_select options
-  const FORMAT_MAP = { 'Video': 'Video', 'Photo': 'Photos', 'Mixed': 'Video & Photo' };
-  const notionFormat = FORMAT_MAP[format] || 'Video';
-
-  // Map form priority → Notion Priority multi_select options
-  const PRIORITY_MAP = { 'Urgent': 'Urgent', 'High': 'Urgent', 'Normal': 'Medium', 'Low': 'Low' };
-  const notionPriority = PRIORITY_MAP[getColValue(item, COL.priority)] || 'Medium';
-
-  // Project properties
-  const props = {
-    'Name':     { title: richText(name) },
-    'Status':   { status: { name: 'In progress' } },
-    'Format':   { multi_select: [{ name: notionFormat }] },
-    'Priority': { multi_select: [{ name: notionPriority }] },
-  };
-  if (deadline) {
-    props['Release Date'] = { date: { start: deadline } };
-  }
-
-  // Page body — mirrors the "Start from here" template structure
-  const details = [
-    bulletRow('Format',          format + (videoFormat ? ` · ${videoFormat}` : '')),
-    bulletRow('Content Type',    contentType),
-    bulletRow('Distribution',    getColValue(item, COL.distribution)),
-    bulletRow('Quantity',        getColValue(item, COL.quantity)),
-    bulletRow('Deadline',        deadline),
-    bulletRow('Location',        getColValue(item, COL.location)),
-    bulletRow('Bikes',           getColValue(item, COL.bikesInvolved)
-                                   + (getColValue(item, COL.whichModels) ? ` — ${getColValue(item, COL.whichModels)}` : '')),
-    bulletRow('Actors/Riders',   getColValue(item, COL.actors)),
-    bulletRow('Requester',       getColValue(item, COL.requester)),
-    bulletRow('Requester Email', getColValue(item, COL.requesterEmail)),
-    bulletRow('Coordinate With', getColValue(item, COL.peopleToCoordinate)),
-    bulletRow('Monday Ticket #', item.id),
-  ].filter(Boolean);
-
-  const children = [
-    heading2('Overview Description'),
-    paragraph(description),
-    heading2('Request Details'),
-    ...details,
-    heading2('Milanote'),
-    paragraph('Link: '),
-    heading2('Frame.IO'),
-    paragraph('Link: '),
-    heading2('Google Drive'),
-    paragraph('Link: '),
-    heading2('YouTube'),
-    paragraph('Link: '),
-  ];
-
-  const res = await fetch(`${NOTION_API}/pages`, {
-    method:  'POST',
-    headers: notionHeaders(),
-    body:    JSON.stringify({
-      parent:     { database_id: PROJECTS_DB },
-      properties: props,
-      children,
-    }),
-  });
-
-  if (!res.ok) throw new Error(`Notion project error ${res.status}: ${await res.text()}`);
-  const page = await res.json();
-  return { pageId: page.id, pageUrl: page.url, format, contentType };
-}
-
-// ── Create single delivery task linked to the project ───────────────────────
-async function createProjectTasks(pageId, pageUrl, format, contentType, deadline) {
-  const taskName = DELIVERY_TASK[format] || 'Delivery';
-
-  const res = await fetch(`${NOTION_API}/pages`, {
-    method:  'POST',
-    headers: notionHeaders(),
-    body:    JSON.stringify({
-      parent:     { database_id: TASKS_DB },
-      properties: {
-        'Name':    { title: richText(taskName) },
-        'Status':  { select: { name: 'Not Started' } },
-        'Project': { relation: [{ id: pageId }] },
-        ...(deadline ? { 'Due Date': { date: { start: deadline } } } : {}),
-      },
-    }),
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    console.error(`[notion] Task "${taskName}" failed ${res.status}:`, err);
-  } else {
-    console.log(`[notion] Task "${taskName}" created`);
-  }
-}
-
-// ── Full Notion setup on approval ────────────────────────────────────────────
-async function setupNotionProject(item) {
-  const deadline = getColValue(item, COL.deadline);
-  const { pageId, pageUrl, format, contentType } = await createNotionProject(item);
-  await createProjectTasks(pageId, pageUrl, format, contentType, deadline);
-  console.log(`[notion] Project created: ${pageUrl} with ${format} tasks`);
-}
 
 // ── Handler ──────────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
@@ -178,16 +28,32 @@ export default async function handler(req, res) {
 
     await moveItem(item.id, GROUP.inProduction);
 
-    const results = await Promise.allSettled([
-      setupNotionProject(item),
-      requesterEmail
-        ? sendApproved({ to: requesterEmail, summary: item.name, itemId: item.id })
-        : Promise.resolve(),
-    ]);
+    // Leave a structured update so the Cowork automation can pick it up
+    const format      = getColValue(item, COL.format)      || '';
+    const videoFormat = getColValue(item, COL.videoFormat) || '';
+    const contentType = getColValue(item, COL.contentType) || '';
+    const deadline    = getColValue(item, COL.deadline)    || '';
+    const priority    = getColValue(item, COL.priority)    || '';
+    const notes       = getColValue(item, COL.notes)       || '';
 
-    results.forEach((r, i) => {
-      if (r.status === 'rejected') console.error(`[approve] step ${i} failed:`, r.reason?.message);
-    });
+    const updateBody = [
+      `✅ Approved — Notion setup pending`,
+      ``,
+      `Format: ${format}${videoFormat ? ` · ${videoFormat}` : ''}`,
+      `Content type: ${contentType}`,
+      `Deadline: ${deadline}`,
+      `Priority: ${priority}`,
+      notes ? `Notes: ${notes}` : '',
+    ].filter(Boolean).join('\n');
+
+    await createUpdate(item.id, updateBody).catch(e =>
+      console.error('[monday] update comment failed:', e.message)
+    );
+
+    if (requesterEmail) {
+      await sendApproved({ to: requesterEmail, summary: item.name, itemId: item.id })
+        .catch(e => console.error('[email] sendApproved failed:', e.message));
+    }
 
     return res.redirect(`${process.env.APP_URL}/track.html?id=${item.id}&msg=approved`);
   }
