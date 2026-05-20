@@ -27,19 +27,14 @@ export default async function handler(req, res) {
     : d.projectName;
 
   // Map form values to Monday labels where they differ
-  const LOCATION_MAP     = { 'TBD': 'TBD — We Decide' };
-  const DISTRIBUTION_MAP = { 'Partners': 'Inside Network' };
-  // Email/Other: not yet in Monday dropdown — fallback to Internal until added manually
-  const VALID_CONTENT_TYPES = new Set(['Launch','Social Clip','YouTube Long-form','Tutorial',
-    'Event Coverage','Testimonial','Website Asset','Internal']);
-  const contentTypeLabel = VALID_CONTENT_TYPES.has(d.contentType) ? d.contentType : 'Internal';
+  const LOCATION_MAP = { 'TBD': 'TBD — We Decide' };
 
   // Build Monday column values
   const colValues = {
     [COL.priority]:       { label: d.priority || 'Normal' },
     [COL.format]:         { label: d.format },
-    [COL.contentType]:    { labels: [contentTypeLabel] },
-    [COL.distribution]:   { labels: [DISTRIBUTION_MAP[d.distribution] || d.distribution] },
+    [COL.contentType]:    { labels: [d.contentType] },
+    [COL.distribution]:   { labels: [d.distribution] },
     [COL.quantity]:       d.quantity,
     [COL.deadline]:       { date: d.deadline },
     [COL.location]:       { label: LOCATION_MAP[d.location] || d.location },
