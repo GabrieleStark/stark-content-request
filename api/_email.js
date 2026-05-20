@@ -1,18 +1,28 @@
-// api/_email.js — shared email helpers via SendGrid
+// api/_email.js — shared email helpers via Google Apps Script relay
 
-import sgMail from '@sendgrid/mail';
+const APP = process.env.APP_URL || 'https://stark-content-request.vercel.app';
 
-const FROM = 'gabriele.rucco@starkfuture.com';
-const APP  = process.env.APP_URL || 'https://stark-content-request.vercel.app';
+async function sendEmail({ to, subject, html }) {
+  const url = process.env.APPS_SCRIPT_URL;
+  if (!url) throw new Error('APPS_SCRIPT_URL env var not set');
 
-function init() {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const res = await fetch(url, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify({
+      secret:  process.env.APPS_SCRIPT_SECRET,
+      to,
+      subject,
+      html,
+    }),
+  });
+
+  const text = await res.text();
+  if (text !== 'OK') throw new Error(`Apps Script relay error: ${text}`);
 }
 
 export async function sendConfirmation({ to, name, itemId, summary }) {
-  init();
-  await sgMail.send({
-    from: { name: 'Stark Future Content', email: FROM },
+  await sendEmail({
     to,
     subject: `✅ Request received — ${summary}`,
     html: `
@@ -34,7 +44,6 @@ export async function sendConfirmation({ to, name, itemId, summary }) {
 }
 
 export async function sendApprovalRequest({ itemId, summary, data, approveToken }) {
-  init();
   const base        = `${APP}/api/approve?token=${approveToken}`;
   const approveUrl  = `${base}&action=approve`;
   const rejectUrl   = `${APP}/reject.html?token=${approveToken}`;
@@ -63,9 +72,8 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
     `<tr><td style="color:#888;padding:4px 12px 4px 0;font-size:13px;white-space:nowrap;vertical-align:top">${k}</td><td style="font-size:13px;padding:4px 0;vertical-align:top">${v}</td></tr>`
   ).join('');
 
-  await sgMail.send({
-    from: { name: 'Stark Future Content', email: FROM },
-    to:   process.env.AMEDEO_EMAIL,
+  await sendEmail({
+    to:      process.env.AMEDEO_EMAIL,
     subject: `📋 New content request — ${summary}`,
     html: `
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111">
@@ -98,9 +106,7 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
 }
 
 export async function sendApproved({ to, summary, itemId }) {
-  init();
-  await sgMail.send({
-    from: { name: 'Stark Future Content', email: FROM },
+  await sendEmail({
     to,
     subject: `✅ Request approved — ${summary}`,
     html: `
@@ -121,9 +127,7 @@ export async function sendApproved({ to, summary, itemId }) {
 }
 
 export async function sendRejected({ to, summary, itemId, reason, editToken }) {
-  init();
-  await sgMail.send({
-    from: { name: 'Stark Future Content', email: FROM },
+  await sendEmail({
     to,
     subject: `❌ Request not approved — ${summary}`,
     html: `
