@@ -5,14 +5,69 @@
 import { COL, GROUP, getItemByToken, updateItem, moveItem, getColValue } from './_monday.js';
 import { sendApproved, sendRejected } from './_email.js';
 
-const NOTION_API   = 'https://api.notion.com/v1';
-const NOTION_VER   = '2022-06-28';
+const NOTION_API  = 'https://api.notion.com/v1';
+const NOTION_VER  = '2022-06-28';
+const PROJECTS_DB = '36464f16-cf3f-81a7-bbb3-f4761c94b070'; // Projects database
+const TASKS_DB    = '36464f16-cf3f-8127-880d-000b77860cd4'; // Tasks database
 
-function richText(str) {
-  return [{ text: { content: String(str || '') } }];
+// ── Task templates by format ────────────────────────────────────────────────
+const TASKS_BY_FORMAT = {
+  'Video': [
+    { name: 'Planning & Brief',  status: 'Planning'    },
+    { name: 'Filming',           status: 'Not Started' },
+    { name: 'Editing',           status: 'Not Started' },
+    { name: 'Color Grading',     status: 'Not Started' },
+    { name: 'Review & Approval', status: 'Not Started' },
+    { name: 'Export & Delivery', status: 'Not Started' },
+  ],
+  'Photo': [
+    { name: 'Planning & Brief',  status: 'Planning'    },
+    { name: 'Shooting',          status: 'Not Started' },
+    { name: 'Selection',         status: 'Not Started' },
+    { name: 'Retouching',        status: 'Not Started' },
+    { name: 'Review & Approval', status: 'Not Started' },
+    { name: 'Export & Delivery', status: 'Not Started' },
+  ],
+  'Mixed': [
+    { name: 'Planning & Brief',  status: 'Planning'    },
+    { name: 'Filming',           status: 'Not Started' },
+    { name: 'Shooting',          status: 'Not Started' },
+    { name: 'Editing',           status: 'Not Started' },
+    { name: 'Color Grading',     status: 'Not Started' },
+    { name: 'Retouching',        status: 'Not Started' },
+    { name: 'Review & Approval', status: 'Not Started' },
+    { name: 'Export & Delivery', status: 'Not Started' },
+  ],
+};
+
+// Extra tasks by content type
+const EXTRA_BY_CONTENT_TYPE = {
+  'Tutorial':          { name: 'Script Writing',     status: 'Planning'    },
+  'YouTube Long-form': { name: 'Thumbnail Design',   status: 'Not Started' },
+  'Launch':            { name: 'Brief & Positioning', status: 'Planning'   },
+};
+
+function notionHeaders() {
+  return {
+    'Authorization':  `Bearer ${process.env.NOTION_API_KEY}`,
+    'Notion-Version': NOTION_VER,
+    'Content-Type':   'application/json',
+  };
 }
 
-function makeRow(label, value) {
+function richText(str) {
+  return [{ type: 'text', text: { content: String(str || '').slice(0, 2000) } }];
+}
+
+function heading2(text) {
+  return { type: 'heading_2', heading_2: { rich_text: richText(text) } };
+}
+
+function paragraph(text) {
+  return { type: 'paragraph', paragraph: { rich_text: richText(text) } };
+}
+
+function bulletRow(label, value) {
   if (!value) return null;
   return {
     type: 'bulleted_list_item',
@@ -25,124 +80,138 @@ function makeRow(label, value) {
   };
 }
 
-async function createNotionTask(item) {
-  const name     = item.name;
-  const deadline = getColValue(item, COL.deadline);
+// ── Create Notion project page ───────────────────────────────────────────────
+async function createNotionProject(item) {
+  const name        = item.name;
+  const deadline    = getColValue(item, COL.deadline);
+  const format      = getColValue(item, COL.format)      || '';
+  const videoFormat = getColValue(item, COL.videoFormat) || '';
+  const contentType = getColValue(item, COL.contentType) || '';
+  const description = getColValue(item, COL.notes)       || name;
 
-  // Properties for the Projects database
+  // Project properties
   const props = {
     'Name':   { title: richText(name) },
     'Status': { status: { name: 'In progress' } },
   };
-
   if (deadline) {
-    props['Due Date'] = { date: { start: deadline } };
+    props['Release Date'] = { date: { start: deadline } };
   }
 
-  // Build page body with all form fields
-  const fields = [
-    makeRow('Format',            getColValue(item, COL.format)
-                                   + (getColValue(item, COL.videoFormat) ? ` · ${getColValue(item, COL.videoFormat)}` : '')),
-    makeRow('Content Type',      getColValue(item, COL.contentType)),
-    makeRow('Distribution',      getColValue(item, COL.distribution)),
-    makeRow('Quantity',          getColValue(item, COL.quantity)),
-    makeRow('Deadline',          deadline),
-    makeRow('Location',          getColValue(item, COL.location)),
-    makeRow('Priority',          getColValue(item, COL.priority)),
-    makeRow('Bikes Involved',    getColValue(item, COL.bikesInvolved)),
-    makeRow('Which Models',      getColValue(item, COL.whichModels)),
-    makeRow('Actors/Riders',     getColValue(item, COL.actors)),
-    makeRow('Requester',         getColValue(item, COL.requester)),
-    makeRow('Requester Email',   getColValue(item, COL.requesterEmail)),
-    makeRow('Recipient',         getColValue(item, COL.recipient)),
-    makeRow('Coordinate With',   getColValue(item, COL.peopleToCoordinate)),
-    makeRow('Monday Ticket #',   item.id),
+  // Page body — mirrors the "Start from here" template structure
+  const details = [
+    bulletRow('Format',          format + (videoFormat ? ` · ${videoFormat}` : '')),
+    bulletRow('Content Type',    contentType),
+    bulletRow('Distribution',    getColValue(item, COL.distribution)),
+    bulletRow('Quantity',        getColValue(item, COL.quantity)),
+    bulletRow('Deadline',        deadline),
+    bulletRow('Location',        getColValue(item, COL.location)),
+    bulletRow('Bikes',           getColValue(item, COL.bikesInvolved)
+                                   + (getColValue(item, COL.whichModels) ? ` — ${getColValue(item, COL.whichModels)}` : '')),
+    bulletRow('Actors/Riders',   getColValue(item, COL.actors)),
+    bulletRow('Requester',       getColValue(item, COL.requester)),
+    bulletRow('Requester Email', getColValue(item, COL.requesterEmail)),
+    bulletRow('Coordinate With', getColValue(item, COL.peopleToCoordinate)),
+    bulletRow('Monday Ticket #', item.id),
   ].filter(Boolean);
 
-  const notes = getColValue(item, COL.notes);
   const children = [
-    {
-      type: 'heading_2',
-      heading_2: { rich_text: richText('Request Details') },
-    },
-    ...fields,
-    ...(notes ? [
-      {
-        type: 'heading_2',
-        heading_2: { rich_text: richText('Notes') },
-      },
-      {
-        type: 'paragraph',
-        paragraph: { rich_text: richText(notes) },
-      },
-    ] : []),
+    heading2('Overview Description'),
+    paragraph(description),
+    heading2('Request Details'),
+    ...details,
+    heading2('Milanote'),
+    paragraph('Link: '),
+    heading2('Frame.IO'),
+    paragraph('Link: '),
+    heading2('Google Drive'),
+    paragraph('Link: '),
+    heading2('YouTube'),
+    paragraph('Link: '),
   ];
 
-  const notionRes = await fetch(`${NOTION_API}/pages`, {
+  const res = await fetch(`${NOTION_API}/pages`, {
     method:  'POST',
-    headers: {
-      'Authorization':  `Bearer ${process.env.NOTION_API_KEY}`,
-      'Notion-Version': NOTION_VER,
-      'Content-Type':   'application/json',
-    },
-    body: JSON.stringify({
-      parent:     { database_id: process.env.NOTION_TASKS_DS_ID },
+    headers: notionHeaders(),
+    body:    JSON.stringify({
+      parent:     { database_id: PROJECTS_DB },
       properties: props,
       children,
     }),
   });
-  if (!notionRes.ok) {
-    const err = await notionRes.text();
-    throw new Error(`Notion API error ${notionRes.status}: ${err}`);
-  }
+
+  if (!res.ok) throw new Error(`Notion project error ${res.status}: ${await res.text()}`);
+  const page = await res.json();
+  return { pageId: page.id, pageUrl: page.url, format, contentType };
 }
 
+// ── Create tasks linked to the project ──────────────────────────────────────
+async function createProjectTasks(pageId, pageUrl, format, contentType, deadline) {
+  const baseTasks = TASKS_BY_FORMAT[format] || TASKS_BY_FORMAT['Video'];
+  const extra     = EXTRA_BY_CONTENT_TYPE[contentType];
+  const tasks     = extra ? [extra, ...baseTasks] : baseTasks;
+
+  await Promise.all(tasks.map(task =>
+    fetch(`${NOTION_API}/pages`, {
+      method:  'POST',
+      headers: notionHeaders(),
+      body:    JSON.stringify({
+        parent:     { database_id: TASKS_DB },
+        properties: {
+          'Name':    { title: richText(task.name) },
+          'Status':  { select: { name: task.status } },
+          'Project': { relation: [{ id: pageId }] },
+          ...(deadline && task.status !== 'Planning'
+            ? { 'Due Date': { date: { start: deadline } } }
+            : {}),
+        },
+      }),
+    }).then(r => { if (!r.ok) console.error(`Task "${task.name}" failed:`, r.status); })
+  ));
+}
+
+// ── Full Notion setup on approval ────────────────────────────────────────────
+async function setupNotionProject(item) {
+  const deadline = getColValue(item, COL.deadline);
+  const { pageId, pageUrl, format, contentType } = await createNotionProject(item);
+  await createProjectTasks(pageId, pageUrl, format, contentType, deadline);
+  console.log(`[notion] Project created: ${pageUrl} with ${format} tasks`);
+}
+
+// ── Handler ──────────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
-  // ── GET: approve action ──────────────────────────────────────────────
+
+  // GET: approve
   if (req.method === 'GET') {
     const { token, action } = req.query;
-    if (!token || action !== 'approve') {
-      return res.status(400).send('Invalid request');
-    }
+    if (!token || action !== 'approve') return res.status(400).send('Invalid request');
 
     const item = await getItemByToken(COL.approveToken, token);
     if (!item) return res.status(404).send('Ticket not found');
 
-    // Already processed?
     if (item.group.id !== GROUP.inReview) {
       return res.redirect(`${process.env.APP_URL}/track.html?id=${item.id}&msg=already_processed`);
     }
 
     const requesterEmail = getColValue(item, COL.requesterEmail);
-    const editToken      = getColValue(item, COL.editToken);
 
     await moveItem(item.id, GROUP.inProduction);
 
-    // Run Notion + email in parallel to stay within function timeout
-    console.log('[approve] starting parallel tasks, requesterEmail:', requesterEmail);
     const results = await Promise.allSettled([
-      createNotionTask(item),
+      setupNotionProject(item),
       requesterEmail
         ? sendApproved({ to: requesterEmail, summary: item.name, itemId: item.id })
         : Promise.resolve(),
     ]);
 
-    if (results[0].status === 'rejected') {
-      console.error('[approve] Notion failed:', results[0].reason);
-    } else {
-      console.log('[approve] Notion task created');
-    }
-    if (results[1].status === 'rejected') {
-      console.error('[approve] email failed:', results[1].reason);
-    } else {
-      console.log('[approve] confirmation email sent to:', requesterEmail);
-    }
+    results.forEach((r, i) => {
+      if (r.status === 'rejected') console.error(`[approve] step ${i} failed:`, r.reason?.message);
+    });
 
-    // Redirect Amedeo to a confirmation page
     return res.redirect(`${process.env.APP_URL}/track.html?id=${item.id}&msg=approved`);
   }
 
-  // ── POST: reject action ──────────────────────────────────────────────
+  // POST: reject
   if (req.method === 'POST') {
     const { token, reason } = req.body;
     if (!token) return res.status(400).json({ error: 'Missing token' });
@@ -154,17 +223,12 @@ export default async function handler(req, res) {
     const editToken      = getColValue(item, COL.editToken);
 
     await moveItem(item.id, GROUP.onHold);
-    await updateItem(item.id, {
-      [COL.rejectionReason]: { text: reason || '' },
-    });
+    await updateItem(item.id, { [COL.rejectionReason]: { text: reason || '' } });
 
     if (requesterEmail && editToken) {
       await sendRejected({
-        to:        requesterEmail,
-        summary:   item.name,
-        itemId:    item.id,
-        reason,
-        editToken,
+        to: requesterEmail, summary: item.name,
+        itemId: item.id, reason, editToken,
       }).catch(console.error);
     }
 
