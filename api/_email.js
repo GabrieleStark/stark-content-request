@@ -1,13 +1,26 @@
-// api/_email.js — shared email helpers via Resend
+// api/_email.js — shared email helpers via Gmail SMTP (nodemailer)
 
-import { Resend } from 'resend';
-const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM   = process.env.FROM_EMAIL   || 'noreply@starkfuture.com';
-const APP    = process.env.APP_URL      || 'https://stark-content-request.vercel.app';
+import nodemailer from 'nodemailer';
+
+const FROM = process.env.GMAIL_USER || 'gabriele.rucco@starkfuture.com';
+const APP  = process.env.APP_URL    || 'https://stark-content-request.vercel.app';
+
+function createTransport() {
+  return nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
+    },
+  });
+}
 
 export async function sendConfirmation({ to, name, itemId, summary }) {
-  await resend.emails.send({
-    from:    FROM,
+  const transport = createTransport();
+  await transport.sendMail({
+    from: `Stark Future Content <${FROM}>`,
     to,
     subject: `✅ Request received — ${summary}`,
     html: `
@@ -22,9 +35,7 @@ export async function sendConfirmation({ to, name, itemId, summary }) {
            style="display:inline-block;background:#111;color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px">
           Track your request →
         </a>
-        <p style="margin-top:32px;font-size:12px;color:#aaa">
-          Request ID: #${itemId}
-        </p>
+        <p style="margin-top:32px;font-size:12px;color:#aaa">Request ID: #${itemId}</p>
       </div>
     `,
   });
@@ -59,9 +70,10 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
     `<tr><td style="color:#888;padding:4px 12px 4px 0;font-size:13px;white-space:nowrap;vertical-align:top">${k}</td><td style="font-size:13px;padding:4px 0;vertical-align:top">${v}</td></tr>`
   ).join('');
 
-  await resend.emails.send({
-    from:    FROM,
-    to:      process.env.AMEDEO_EMAIL,
+  const transport = createTransport();
+  await transport.sendMail({
+    from: `Stark Future Content <${FROM}>`,
+    to:   process.env.AMEDEO_EMAIL,
     subject: `📋 New content request — ${summary}`,
     html: `
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111">
@@ -94,9 +106,9 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
 }
 
 export async function sendApproved({ to, summary, itemId }) {
-  console.log('[sendApproved] FROM:', FROM, '| TO:', to, '| RESEND_KEY set:', !!process.env.RESEND_API_KEY);
-  const result = await resend.emails.send({
-    from:    FROM,
+  const transport = createTransport();
+  await transport.sendMail({
+    from: `Stark Future Content <${FROM}>`,
     to,
     subject: `✅ Request approved — ${summary}`,
     html: `
@@ -114,12 +126,12 @@ export async function sendApproved({ to, summary, itemId }) {
       </div>
     `,
   });
-  console.log('[sendApproved] Resend response:', JSON.stringify(result));
 }
 
 export async function sendRejected({ to, summary, itemId, reason, editToken }) {
-  await resend.emails.send({
-    from:    FROM,
+  const transport = createTransport();
+  await transport.sendMail({
+    from: `Stark Future Content <${FROM}>`,
     to,
     subject: `❌ Request not approved — ${summary}`,
     html: `

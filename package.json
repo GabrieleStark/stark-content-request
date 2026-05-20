@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "Content request ticketing system for Stark Future",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
+    "nodemailer": "^8.0.7",
     "resend": "^3.2.0"
   }
 }
