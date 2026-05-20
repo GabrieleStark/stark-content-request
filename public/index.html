@@ -523,6 +523,12 @@
       <div class="error-msg" id="err-location">Please select a location.</div>
     </div>
 
+    <!-- Location Details — conditional -->
+    <div class="field conditional" id="field-location-details">
+      <label for="locationDetails">Where exactly?</label>
+      <input type="text" id="locationDetails" name="locationDetails" placeholder="e.g. Andorra, Garriga Circuit, TF headquarters…" />
+    </div>
+
     <div class="field">
       <label>Bikes involved? <span class="required">*</span></label>
       <div class="toggle-group">
@@ -639,6 +645,13 @@
   document.querySelectorAll('input[name="bikesInvolved"]').forEach(el => {
     el.addEventListener('change', () => {
       document.getElementById('field-models').classList.toggle('visible', el.value === 'Yes');
+    });
+  });
+
+  document.querySelectorAll('input[name="location"]').forEach(el => {
+    el.addEventListener('change', () => {
+      document.getElementById('field-location-details').classList.toggle('visible', el.value === 'Specific Location');
+      if (el.value !== 'Specific Location') document.getElementById('locationDetails').value = '';
     });
   });
 
@@ -781,6 +794,7 @@
       quantity:           parseInt(document.getElementById('quantity').value, 10),
       deadline:           document.getElementById('deadline').value,
       location:           document.querySelector('input[name="location"]:checked')?.value,
+      locationDetails:    document.getElementById('locationDetails').value.trim() || null,
       bikesInvolved:      document.querySelector('input[name="bikesInvolved"]:checked')?.value,
       whichModels:        document.getElementById('whichModels').value.trim() || null,
       actors:             document.getElementById('actors').value.trim() || null,
