@@ -612,11 +612,11 @@
   // ── Content type options by format ──────────────────────────────────
   const VIDEO_CONTENT_TYPES = [
     'Launch', 'Social Clip', 'YouTube Long-form', 'Tutorial',
-    'Event Coverage', 'Testimonial', 'Website Asset', 'Internal', 'Other',
+    'Event Coverage', 'Testimonial', 'Website Asset', 'Internal',
   ];
   const PHOTO_CONTENT_TYPES = [
-    'Product Shot', 'Lifestyle', 'Social Media', 'Event Coverage',
-    'Press Kit', 'Website Asset', 'Internal', 'Other',
+    'Launch', 'Social Clip', 'Event Coverage',
+    'Testimonial', 'Website Asset', 'Internal',
   ];
 
   function updateContentTypes(format) {
@@ -799,7 +799,10 @@
         body:    JSON.stringify(data),
       });
 
-      if (!res.ok) throw new Error('Server error');
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || `Server error ${res.status}`);
+      }
 
       const json = await res.json();
       if (json.itemId) document.getElementById('trackLink').href = `/track?id=${json.itemId}`;
@@ -810,7 +813,7 @@
     } catch (err) {
       btn.disabled = false;
       btn.textContent = 'Send Request →';
-      alert('Something went wrong. Please try again or contact the production team directly.');
+      alert(`Something went wrong: ${err.message}`);
     }
   });
 
