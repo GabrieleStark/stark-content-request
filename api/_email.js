@@ -47,9 +47,10 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
   const base        = `${APP}/api/approve?token=${approveToken}`;
   const approveUrl  = `${base}&action=approve`;
   const rejectUrl   = `${APP}/reject.html?token=${approveToken}`;
-  const description = data.request || summary;
+  const description = data.request || '';
 
   const rows = [
+    ['Project Name',            summary],
     data.priority           && ['Priority',           data.priority],
     ['Format',                  data.format + (data.videoFormat ? ` · ${data.videoFormat}` : '')],
     ['Content Type',            data.contentType],
@@ -91,9 +92,7 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111">
         <p style="font-size:13px;color:#888;letter-spacing:.1em;text-transform:uppercase">Stark Future · Content Request</p>
         <h2 style="margin:8px 0 4px">New request to review</h2>
-        <div style="background:#f5f5f5;border-radius:8px;padding:14px 18px;margin:16px 0;font-size:14px;line-height:1.5">
-          ${description}
-        </div>
+        ${description ? `<p style="font-size:12px;color:#888;margin:16px 0 4px;text-transform:uppercase;letter-spacing:.08em">Description</p><div style="background:#f5f5f5;border-radius:8px;padding:14px 18px;margin:0 0 16px;font-size:14px;line-height:1.5">${description}</div>` : ''}
         <table style="margin:16px 0 28px;border-collapse:collapse">${tableRows}</table>
         <table style="border-collapse:collapse">
           <tr>
