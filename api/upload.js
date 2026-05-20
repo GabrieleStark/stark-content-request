@@ -22,9 +22,10 @@ export default async function handler(req, res) {
 
   try {
     const blob = await put(filename, req, {
-      access: 'public',
+      access: 'private',
     });
-    return res.status(200).json({ url: blob.url });
+    // downloadUrl is a pre-signed URL accessible to anyone with the link
+    return res.status(200).json({ url: blob.downloadUrl || blob.url });
   } catch (err) {
     console.error('[upload] Blob error:', err.message);
     return res.status(500).json({ error: 'Upload failed' });
