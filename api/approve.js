@@ -22,28 +22,74 @@ function richText(str) {
   return [{ type: 'text', text: { content: String(str || '').slice(0, 2000) } }];
 }
 
+// ── Rich text summary with bold labels ──────────────────────────────────────
+function buildRichTextSummary(item) {
+  const v = (col) => getColValue(item, col) || '';
+  const rows = [
+    ['Format',           v(COL.format) + (v(COL.videoFormat) ? ' · ' + v(COL.videoFormat) : '')],
+    ['Content type',     v(COL.contentType)],
+    ['Distribution',     v(COL.distribution)],
+    ['Quantity',         v(COL.quantity)],
+    ['Deadline',         v(COL.deadline)],
+    ['Location',         v(COL.location)],
+    ['Bikes',            v(COL.bikesInvolved) + (v(COL.whichModels) ? ' — ' + v(COL.whichModels) : '')],
+    v(COL.actors)             && ['Actors/Riders',   v(COL.actors)],
+    v(COL.requester)          && ['On behalf of',    v(COL.requester)],
+    v(COL.requesterEmail)     && ['Requester email', v(COL.requesterEmail)],
+    v(COL.peopleToCoordinate) && ['Coordinate with', v(COL.peopleToCoordinate)],
+    ['Monday ticket',    `#${item.id}`],
+  ].filter(Boolean);
+
+  const result = [];
+  for (let i = 0; i < rows.length; i++) {
+    const [label, value] = rows[i];
+    if (i > 0) result.push({ type: 'text', text: { content: '\n' } });
+    result.push({ type: 'text', text: { content: `${label}: ` }, annotations: { bold: true } });
+    result.push({ type: 'text', text: { content: String(value || '') } });
+  }
+  return result;
+}
+
+// ── Parse uploaded file URLs from Monday notes field ─────────────────────────
+function parseFileUrls(notesText) {
+  if (!notesText) return [];
+  const match = notesText.match(/📎 Uploaded files:\n([\s\S]+?)(\n\n|$)/);
+  if (!match) return [];
+  return match[1].split('\n').filter(u => u.startsWith('http'));
+}
+
 // ── Create Notion project page ───────────────────────────────────────────────
-// Creates the page with properties only (no children body).
-// Notion applies the "Start from here" default template on first open,
-// which includes the inline Tasks view, Overview, Milanote, Frame.IO, etc.
 async function createNotionProject(item) {
   const name     = item.name;
   const deadline = getColValue(item, COL.deadline);
   const format   = getColValue(item, COL.format) || '';
+  const priority = getColValue(item, COL.priority) || 'Normal';
   const notes    = getColValue(item, COL.notes)  || '';
 
   const FORMAT_MAP   = { 'Video': 'Video', 'Photo': 'Photos', 'Mixed': 'Video & Photo' };
-  const PRIORITY_MAP = { 'Urgent': 'Urgent', 'High': 'Urgent', 'Normal': 'Medium', 'Low': 'Low' };
+  const PRIORITY_MAP = { 'Urgent': 'Urgent', 'Normal': 'Medium', 'Low': 'Low' };
 
   const props = {
     'Name':     { title: richText(name) },
     'Status':   { status: { name: 'In progress' } },
     'Format':   { multi_select: [{ name: FORMAT_MAP[format] || 'Video' }] },
-    'Priority': { multi_select: [{ name: PRIORITY_MAP[getColValue(item, COL.priority)] || 'Medium' }] },
-    'Text':     { rich_text: richText(buildSummary(item)) },
+    'Priority': { multi_select: [{ name: PRIORITY_MAP[priority] || 'Medium' }] },
+    'Text':     { rich_text: buildRichTextSummary(item) },
   };
 
   if (deadline) props['Release Date'] = { date: { start: deadline } };
+
+  // Add uploaded files to Files & media property
+  const fileUrls = parseFileUrls(notes);
+  if (fileUrls.length) {
+    props['Files & media'] = {
+      files: fileUrls.map(url => ({
+        name: decodeURIComponent(url.split('/').pop().split('?')[0]).slice(0, 100) || 'attachment',
+        type: 'external',
+        external: { url },
+      })),
+    };
+  }
 
   const res = await fetch(`${NOTION_API}/pages`, {
     method:  'POST',
@@ -51,38 +97,20 @@ async function createNotionProject(item) {
     body:    JSON.stringify({
       parent:     { database_id: PROJECTS_DB },
       properties: props,
-      // No children — Notion applies the "Start from here" default template on first open
     }),
   });
 
   if (!res.ok) throw new Error(`Notion project error ${res.status}: ${await res.text()}`);
   const page = await res.json();
-  return { pageId: page.id, pageUrl: page.url, format };
-}
-
-function buildSummary(item) {
-  const lines = [
-    `Format: ${getColValue(item, COL.format) || ''}${getColValue(item, COL.videoFormat) ? ' · ' + getColValue(item, COL.videoFormat) : ''}`,
-    `Content type: ${getColValue(item, COL.contentType) || ''}`,
-    `Distribution: ${getColValue(item, COL.distribution) || ''}`,
-    `Quantity: ${getColValue(item, COL.quantity) || ''}`,
-    `Deadline: ${getColValue(item, COL.deadline) || ''}`,
-    `Location: ${getColValue(item, COL.location) || ''}`,
-    `Bikes: ${getColValue(item, COL.bikesInvolved) || ''}${getColValue(item, COL.whichModels) ? ' — ' + getColValue(item, COL.whichModels) : ''}`,
-    getColValue(item, COL.actors)             ? `Actors/Riders: ${getColValue(item, COL.actors)}` : '',
-    getColValue(item, COL.requester)          ? `On behalf of: ${getColValue(item, COL.requester)}` : '',
-    getColValue(item, COL.requesterEmail)     ? `Requester email: ${getColValue(item, COL.requesterEmail)}` : '',
-    getColValue(item, COL.peopleToCoordinate) ? `Coordinate with: ${getColValue(item, COL.peopleToCoordinate)}` : '',
-    getColValue(item, COL.notes)              ? `Notes: ${getColValue(item, COL.notes)}` : '',
-    `Monday ticket: #${item.id}`,
-  ].filter(Boolean);
-  return lines.join('\n');
+  return { pageId: page.id, pageUrl: page.url, format, priority };
 }
 
 // ── Create single delivery task linked to the project ───────────────────────
-async function createDeliveryTask(pageId, format, deadline) {
-  const TASK_NAME = { 'Video': 'Video Delivery', 'Photo': 'Photo Delivery', 'Mixed': 'Delivery' };
-  const taskName  = TASK_NAME[format] || 'Delivery';
+async function createDeliveryTask(pageId, format, deadline, priority) {
+  const TASK_NAME     = { 'Video': 'Video Delivery', 'Photo': 'Photo Delivery', 'Mixed': 'Delivery' };
+  const PRIORITY_MAP  = { 'Urgent': 'Urgent', 'Normal': 'Medium', 'Low': 'Low' };
+  const taskName      = TASK_NAME[format] || 'Delivery';
+  const taskPriority  = PRIORITY_MAP[priority] || 'Medium';
 
   const res = await fetch(`${NOTION_API}/pages`, {
     method:  'POST',
@@ -90,16 +118,17 @@ async function createDeliveryTask(pageId, format, deadline) {
     body:    JSON.stringify({
       parent:     { database_id: TASKS_DB },
       properties: {
-        'Name':    { title: richText(taskName) },
-        'Status':  { select: { name: 'Not Started' } },
-        'Project': { relation: [{ id: pageId }] },
+        'Name':     { title: richText(taskName) },
+        'Status':   { select: { name: 'Not Started' } },
+        'Project':  { relation: [{ id: pageId }] },
+        'Priority': { multi_select: [{ name: taskPriority }] },
         ...(deadline ? { 'Due Date': { date: { start: deadline } } } : {}),
       },
     }),
   });
 
   if (!res.ok) console.error(`[notion] Task "${taskName}" error ${res.status}:`, await res.text());
-  else         console.log(`[notion] Task "${taskName}" created`);
+  else         console.log(`[notion] Task "${taskName}" created with priority ${taskPriority}`);
 }
 
 // ── Handler ──────────────────────────────────────────────────────────────────
@@ -121,19 +150,14 @@ export default async function handler(req, res) {
 
     await moveItem(item.id, GROUP.inProduction);
 
-    // Create Notion project + task immediately
     try {
       const deadline = getColValue(item, COL.deadline);
-      const { pageId, pageUrl, format } = await createNotionProject(item);
-      await createDeliveryTask(pageId, format, deadline);
-
-      // Mark item so the Cowork fallback task skips it
+      const { pageId, pageUrl, format, priority } = await createNotionProject(item);
+      await createDeliveryTask(pageId, format, deadline, priority);
       await createUpdate(item.id, `📎 Notion project: ${pageUrl}`).catch(() => {});
-
       console.log(`[notion] Project created: ${pageUrl}`);
     } catch (err) {
       console.error('[notion] Setup failed:', err.message);
-      // The Cowork scheduled task "notion-project-setup" will retry automatically
     }
 
     if (requesterEmail) {
