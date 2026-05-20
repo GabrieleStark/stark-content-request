@@ -61,8 +61,7 @@ export default async function handler(req, res) {
 
   const summary = `${d.format} · ${d.contentType} · ${d.deadline}`;
 
-  // Fire emails in parallel, don't block response on failure
-  await Promise.allSettled([
+  const emailResults = await Promise.allSettled([
     sendConfirmation({
       to:      d.requesterEmail,
       name:    d.requesterName,
@@ -76,6 +75,9 @@ export default async function handler(req, res) {
       approveToken,
     }),
   ]);
+
+  console.log('[email] confirmation:', emailResults[0].status, emailResults[0].reason?.message || 'ok');
+  console.log('[email] approval:    ', emailResults[1].status, emailResults[1].reason?.message || 'ok');
 
   return res.status(200).json({ ok: true, itemId });
 }
