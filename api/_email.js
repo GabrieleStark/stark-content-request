@@ -57,7 +57,7 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
     ['Distribution',            data.distribution],
     ['Quantity',                data.quantity],
     ['Deadline',                data.deadline],
-    ['Location',                data.location],
+    ['Location',                data.location + (data.locationDetails ? ' — ' + data.locationDetails : '')],
     ['Bikes',                   data.bikesInvolved + (data.whichModels ? ` — ${data.whichModels}` : '')],
     data.actors             && ['Actors/Riders',      data.actors],
     data.recipient          && ['Recipient',           data.recipient],
