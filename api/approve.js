@@ -1,13 +1,106 @@
 // api/approve.js
 // GET  /api/approve?token=XXX&action=approve  → approves immediately
 // POST /api/approve  { token, action:'reject', reason } → rejects with reason
-//
-// Notion project creation is handled by the Cowork scheduled task
-// "notion-project-setup", which polls Monday every 15 min for items
-// in "In Production" without a Notion URL and creates them from the template.
 
 import { COL, GROUP, getItemByToken, updateItem, moveItem, getColValue, createUpdate } from './_monday.js';
 import { sendApproved, sendRejected } from './_email.js';
+
+const NOTION_API  = 'https://api.notion.com/v1';
+const NOTION_VER  = '2022-06-28';
+const PROJECTS_DB = '36464f16-cf3f-81a7-bbb3-f4761c94b070';
+const TASKS_DB    = '36464f16-cf3f-81ad-ae40-c9c473f9ba98';
+
+function notionHeaders() {
+  return {
+    'Authorization':  `Bearer ${process.env.NOTION_API_KEY}`,
+    'Notion-Version': NOTION_VER,
+    'Content-Type':   'application/json',
+  };
+}
+
+function richText(str) {
+  return [{ type: 'text', text: { content: String(str || '').slice(0, 2000) } }];
+}
+
+// ── Create Notion project page ───────────────────────────────────────────────
+// Creates the page with properties only (no children body).
+// Notion applies the "Start from here" default template on first open,
+// which includes the inline Tasks view, Overview, Milanote, Frame.IO, etc.
+async function createNotionProject(item) {
+  const name     = item.name;
+  const deadline = getColValue(item, COL.deadline);
+  const format   = getColValue(item, COL.format) || '';
+  const notes    = getColValue(item, COL.notes)  || '';
+
+  const FORMAT_MAP   = { 'Video': 'Video', 'Photo': 'Photos', 'Mixed': 'Video & Photo' };
+  const PRIORITY_MAP = { 'Urgent': 'Urgent', 'High': 'Urgent', 'Normal': 'Medium', 'Low': 'Low' };
+
+  const props = {
+    'Name':     { title: richText(name) },
+    'Status':   { status: { name: 'In progress' } },
+    'Format':   { multi_select: [{ name: FORMAT_MAP[format] || 'Video' }] },
+    'Priority': { multi_select: [{ name: PRIORITY_MAP[getColValue(item, COL.priority)] || 'Medium' }] },
+    'Text':     { rich_text: richText(buildSummary(item)) },
+  };
+
+  if (deadline) props['Release Date'] = { date: { start: deadline } };
+
+  const res = await fetch(`${NOTION_API}/pages`, {
+    method:  'POST',
+    headers: notionHeaders(),
+    body:    JSON.stringify({
+      parent:     { database_id: PROJECTS_DB },
+      properties: props,
+      // No children — Notion applies the "Start from here" default template on first open
+    }),
+  });
+
+  if (!res.ok) throw new Error(`Notion project error ${res.status}: ${await res.text()}`);
+  const page = await res.json();
+  return { pageId: page.id, pageUrl: page.url, format };
+}
+
+function buildSummary(item) {
+  const lines = [
+    `Format: ${getColValue(item, COL.format) || ''}${getColValue(item, COL.videoFormat) ? ' · ' + getColValue(item, COL.videoFormat) : ''}`,
+    `Content type: ${getColValue(item, COL.contentType) || ''}`,
+    `Distribution: ${getColValue(item, COL.distribution) || ''}`,
+    `Quantity: ${getColValue(item, COL.quantity) || ''}`,
+    `Deadline: ${getColValue(item, COL.deadline) || ''}`,
+    `Location: ${getColValue(item, COL.location) || ''}`,
+    `Bikes: ${getColValue(item, COL.bikesInvolved) || ''}${getColValue(item, COL.whichModels) ? ' — ' + getColValue(item, COL.whichModels) : ''}`,
+    getColValue(item, COL.actors)             ? `Actors/Riders: ${getColValue(item, COL.actors)}` : '',
+    getColValue(item, COL.requester)          ? `On behalf of: ${getColValue(item, COL.requester)}` : '',
+    getColValue(item, COL.requesterEmail)     ? `Requester email: ${getColValue(item, COL.requesterEmail)}` : '',
+    getColValue(item, COL.peopleToCoordinate) ? `Coordinate with: ${getColValue(item, COL.peopleToCoordinate)}` : '',
+    getColValue(item, COL.notes)              ? `Notes: ${getColValue(item, COL.notes)}` : '',
+    `Monday ticket: #${item.id}`,
+  ].filter(Boolean);
+  return lines.join('\n');
+}
+
+// ── Create single delivery task linked to the project ───────────────────────
+async function createDeliveryTask(pageId, format, deadline) {
+  const TASK_NAME = { 'Video': 'Video Delivery', 'Photo': 'Photo Delivery', 'Mixed': 'Delivery' };
+  const taskName  = TASK_NAME[format] || 'Delivery';
+
+  const res = await fetch(`${NOTION_API}/pages`, {
+    method:  'POST',
+    headers: notionHeaders(),
+    body:    JSON.stringify({
+      parent:     { database_id: TASKS_DB },
+      properties: {
+        'Name':    { title: richText(taskName) },
+        'Status':  { select: { name: 'Not Started' } },
+        'Project': { relation: [{ id: pageId }] },
+        ...(deadline ? { 'Due Date': { date: { start: deadline } } } : {}),
+      },
+    }),
+  });
+
+  if (!res.ok) console.error(`[notion] Task "${taskName}" error ${res.status}:`, await res.text());
+  else         console.log(`[notion] Task "${taskName}" created`);
+}
 
 // ── Handler ──────────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
@@ -28,27 +121,20 @@ export default async function handler(req, res) {
 
     await moveItem(item.id, GROUP.inProduction);
 
-    // Leave a structured update so the Cowork automation can pick it up
-    const format      = getColValue(item, COL.format)      || '';
-    const videoFormat = getColValue(item, COL.videoFormat) || '';
-    const contentType = getColValue(item, COL.contentType) || '';
-    const deadline    = getColValue(item, COL.deadline)    || '';
-    const priority    = getColValue(item, COL.priority)    || '';
-    const notes       = getColValue(item, COL.notes)       || '';
+    // Create Notion project + task immediately
+    try {
+      const deadline = getColValue(item, COL.deadline);
+      const { pageId, pageUrl, format } = await createNotionProject(item);
+      await createDeliveryTask(pageId, format, deadline);
 
-    const updateBody = [
-      `✅ Approved — Notion setup pending`,
-      ``,
-      `Format: ${format}${videoFormat ? ` · ${videoFormat}` : ''}`,
-      `Content type: ${contentType}`,
-      `Deadline: ${deadline}`,
-      `Priority: ${priority}`,
-      notes ? `Notes: ${notes}` : '',
-    ].filter(Boolean).join('\n');
+      // Mark item so the Cowork fallback task skips it
+      await createUpdate(item.id, `📎 Notion project: ${pageUrl}`).catch(() => {});
 
-    await createUpdate(item.id, updateBody).catch(e =>
-      console.error('[monday] update comment failed:', e.message)
-    );
+      console.log(`[notion] Project created: ${pageUrl}`);
+    } catch (err) {
+      console.error('[notion] Setup failed:', err.message);
+      // The Cowork scheduled task "notion-project-setup" will retry automatically
+    }
 
     if (requesterEmail) {
       await sendApproved({ to: requesterEmail, summary: item.name, itemId: item.id })
