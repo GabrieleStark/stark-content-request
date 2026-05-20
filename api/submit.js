@@ -50,6 +50,7 @@ export default async function handler(req, res) {
   if (d.actors)             colValues[COL.actors]             = d.actors;
   if (d.recipient)          colValues[COL.recipient]          = d.recipient;
   if (d.peopleToCoordinate) colValues[COL.peopleToCoordinate] = d.peopleToCoordinate;
+  if (d.locationDetails)    colValues[COL.locationDetails]    = d.locationDetails;
   if (d.reference)          colValues[COL.reference]          = { url: d.reference, text: d.reference };
   if (d.approvalRequired)   colValues[COL.approvalRequired]   = { label: d.approvalRequired };
 
