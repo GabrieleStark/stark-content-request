@@ -68,8 +68,20 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
     data.notes              && ['Notes',               data.notes],
   ].filter(Boolean);
 
+  function renderValue(v) {
+    // Each line: if it looks like a URL, wrap it in a clickable link
+    return String(v).split('\n').map(line => {
+      const t = line.trim();
+      if (/^https?:\/\//i.test(t)) {
+        const label = t.length > 60 ? t.slice(0, 57) + '…' : t;
+        return `<a href="${t}" style="color:#555;word-break:break-all">${label}</a>`;
+      }
+      return line;
+    }).join('<br>');
+  }
+
   const tableRows = rows.map(([k, v]) =>
-    `<tr><td style="color:#888;padding:4px 12px 4px 0;font-size:13px;white-space:nowrap;vertical-align:top">${k}</td><td style="font-size:13px;padding:4px 0;vertical-align:top">${v}</td></tr>`
+    `<tr><td style="color:#888;padding:4px 12px 4px 0;font-size:13px;white-space:nowrap;vertical-align:top">${k}</td><td style="font-size:13px;padding:4px 0;vertical-align:top">${renderValue(v)}</td></tr>`
   ).join('');
 
   await sendEmail({
