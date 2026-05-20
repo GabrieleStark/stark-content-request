@@ -526,12 +526,7 @@
     <!-- Location Details — conditional -->
     <div class="field conditional" id="field-location-details">
       <label>Where exactly?</label>
-      <div class="pill-group">
-        <input type="radio" name="locationDetails" id="loc-hq" value="Stark HQ" />
-        <label for="loc-hq">Stark HQ</label>
-        <input type="radio" name="locationDetails" id="loc-polea" value="Polea Track" />
-        <label for="loc-polea">Polea Track</label>
-      </div>
+      <input type="text" id="locationDetails" placeholder="e.g. Stark HQ, Polea Track" />
     </div>
 
     <div class="field">
@@ -656,7 +651,7 @@
   document.querySelectorAll('input[name="location"]').forEach(el => {
     el.addEventListener('change', () => {
       document.getElementById('field-location-details').classList.toggle('visible', el.value === 'Specific Location');
-      if (el.value !== 'Specific Location') document.querySelectorAll('input[name="locationDetails"]').forEach(r => r.checked = false);
+      if (el.value !== 'Specific Location') document.getElementById('locationDetails').value = '';
     });
   });
 
@@ -799,7 +794,7 @@
       quantity:           parseInt(document.getElementById('quantity').value, 10),
       deadline:           document.getElementById('deadline').value,
       location:           document.querySelector('input[name="location"]:checked')?.value,
-      locationDetails:    document.querySelector('input[name="locationDetails"]:checked')?.value || null,
+      locationDetails:    document.getElementById('locationDetails').value.trim() || null,
       bikesInvolved:      document.querySelector('input[name="bikesInvolved"]:checked')?.value,
       whichModels:        document.getElementById('whichModels').value.trim() || null,
       actors:             document.getElementById('actors').value.trim() || null,
