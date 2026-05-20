@@ -581,6 +581,7 @@
         </div>
       </div>
       <div id="fileList" class="file-list"></div>
+      <div id="uploadWarn" style="display:none;margin-top:8px;padding:10px 14px;background:#fff8e1;border:1px solid #ffc107;border-radius:6px;font-size:13px;color:#7a5c00"></div>
     </div>
 
     <div class="field">
@@ -682,8 +683,8 @@
   }
 
   async function uploadFiles() {
-    if (!selectedFiles.length) return [];
-    const urls = [];
+    if (!selectedFiles.length) return { urls: [], failed: [] };
+    const urls = [], failed = [];
     for (const file of selectedFiles) {
       try {
         const res = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}`, {
@@ -693,10 +694,15 @@
         if (res.ok) {
           const { url } = await res.json();
           urls.push(url);
+        } else {
+          const data = await res.json().catch(() => ({}));
+          failed.push(`${file.name} (${data.error || res.status})`);
         }
-      } catch (_) { /* non-blocking */ }
+      } catch (err) {
+        failed.push(`${file.name} (network error)`);
+      }
     }
-    return urls;
+    return { urls, failed };
   }
 
   // ── Validation ──────────────────────────────────────────────────────
@@ -751,11 +757,16 @@
     btn.disabled = true;
     btn.textContent = 'Sending…';
 
-    // Upload files first (non-blocking — if upload fails, form still submits)
-    const fileUrls = await uploadFiles();
+    // Upload files first (non-blocking — form submits even if upload fails)
+    const { urls: fileUrls, failed: failedUploads } = await uploadFiles();
 
-    const referenceInput = document.getElementById('reference').value.trim();
-    const allReferences  = [referenceInput, ...fileUrls].filter(Boolean);
+    if (failedUploads.length) {
+      const warn = document.getElementById('uploadWarn');
+      if (warn) {
+        warn.textContent = `⚠️ Some files could not be uploaded and won't be attached: ${failedUploads.join(', ')}`;
+        warn.style.display = 'block';
+      }
+    }
 
     const data = {
       requesterName:      document.getElementById('requesterName').value.trim(),
@@ -776,7 +787,8 @@
       requester:          document.getElementById('requester').value.trim() || null,
       recipient:          document.getElementById('recipient').value.trim() || null,
       peopleToCoordinate: document.getElementById('peopleToCoordinate').value.trim() || null,
-      reference:          allReferences.length ? allReferences.join('\n') : null,
+      reference:          document.getElementById('reference').value.trim() || null,
+      uploadedFileUrls:   fileUrls.length ? fileUrls : null,
       notes:              document.getElementById('notes').value.trim() || null,
     };
 
