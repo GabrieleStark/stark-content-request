@@ -66,11 +66,11 @@ export default async function handler(req, res) {
       to:      d.requesterEmail,
       name:    d.requesterName,
       itemId,
-      summary: d.request.substring(0, 60),
+      summary: d.projectName,
     }),
     sendApprovalRequest({
       itemId,
-      summary: d.request.substring(0, 60),
+      summary: d.projectName,
       data:    d,
       approveToken,
     }),
