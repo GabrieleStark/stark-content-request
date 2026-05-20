@@ -64,9 +64,10 @@ export async function sendApprovalRequest({ itemId, summary, data, approveToken 
     data.requesterName      && ['Requester',           data.requesterName],
     data.requesterEmail     && ['Requester Email',     data.requesterEmail],
     data.peopleToCoordinate && ['Coordinate with',    data.peopleToCoordinate],
-    data.reference          && ['Reference',           data.reference],
-    data.approvalRequired   && ['Approval Required',  data.approvalRequired],
-    data.notes              && ['Notes',               data.notes],
+    data.reference                          && ['Reference',       data.reference],
+    data.uploadedFileUrls?.length           && ['Attachments',     data.uploadedFileUrls.join('\n')],
+    data.approvalRequired                   && ['Approval Required', data.approvalRequired],
+    data.notes                              && ['Notes',           data.notes],
   ].filter(Boolean);
 
   function renderValue(v) {
