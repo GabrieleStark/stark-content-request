@@ -400,9 +400,9 @@
     </div>
 
     <div class="field">
-      <label for="projectName">Project name <span class="required">*</span></label>
+      <label for="projectName">Request title <span class="required">*</span></label>
       <input type="text" id="projectName" name="projectName" placeholder="e.g. VARG Launch — Spring 2026" required />
-      <div class="error-msg" id="err-projectName">Please enter a project name.</div>
+      <div class="error-msg" id="err-projectName">Please enter a request title.</div>
     </div>
 
     <div class="divider"></div>
@@ -612,11 +612,11 @@
   // ── Content type options by format ──────────────────────────────────
   const VIDEO_CONTENT_TYPES = [
     'Launch', 'Social Clip', 'YouTube Long-form', 'Tutorial',
-    'Event Coverage', 'Testimonial', 'Website Asset', 'Internal',
+    'Event Coverage', 'Testimonial', 'Website Asset', 'Internal', 'Email', 'Other',
   ];
   const PHOTO_CONTENT_TYPES = [
     'Launch', 'Social Clip', 'Event Coverage',
-    'Testimonial', 'Website Asset', 'Internal',
+    'Testimonial', 'Website Asset', 'Internal', 'Email', 'Other',
   ];
 
   function updateContentTypes(format) {
