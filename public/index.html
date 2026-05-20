@@ -290,6 +290,75 @@
       font-family: inherit;
     }
 
+    /* File upload */
+    .file-drop {
+      position: relative;
+      border: 1px dashed #333;
+      border-radius: 8px;
+      background: #141414;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .file-drop:hover, .file-drop.dragging {
+      border-color: #555;
+      background: #181818;
+    }
+
+    .file-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: none;
+      background: none;
+    }
+
+    .file-drop-inner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 14px;
+      pointer-events: none;
+    }
+
+    .file-drop-icon { font-size: 18px; }
+
+    .file-drop-text {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .file-list {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #141414;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .file-item-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-item-size { color: #555; margin-left: 8px; flex-shrink: 0; }
+    .file-item-remove {
+      background: none; border: none; color: #555; cursor: pointer;
+      font-size: 16px; padding: 0 0 0 8px; line-height: 1; flex-shrink: 0;
+    }
+    .file-item-remove:hover { color: #e2445c; }
+
     /* Error */
     .error-msg {
       font-size: 12px;
@@ -328,6 +397,12 @@
         <input type="email" id="requesterEmail" name="requesterEmail" placeholder="you@starkfuture.com" required />
         <div class="error-msg" id="err-requesterEmail">Please enter a valid email.</div>
       </div>
+    </div>
+
+    <div class="field">
+      <label for="projectName">Project name <span class="required">*</span></label>
+      <input type="text" id="projectName" name="projectName" placeholder="e.g. VARG Launch — Spring 2026" required />
+      <div class="error-msg" id="err-projectName">Please enter a project name.</div>
     </div>
 
     <div class="divider"></div>
@@ -380,8 +455,6 @@
         <option value="">Select…</option>
         <option>Horizontal 16:9</option>
         <option>Vertical 9:16</option>
-        <option>Square 1:1</option>
-        <option>Short-form / Reel</option>
         <option>Multiple formats</option>
       </select>
     </div>
@@ -398,6 +471,7 @@
         <option>Testimonial</option>
         <option>Website Asset</option>
         <option>Internal</option>
+        <option>Other</option>
       </select>
       <div class="error-msg" id="err-contentType">Please select a content type.</div>
     </div>
@@ -411,7 +485,7 @@
         <option>Website</option>
         <option>Dealer Network</option>
         <option>Internal</option>
-        <option>Inside Network</option>
+        <option>Partners</option>
       </select>
       <div class="error-msg" id="err-distribution">Please select a distribution channel.</div>
     </div>
@@ -443,8 +517,8 @@
         <input type="radio" name="location" id="loc-specific" value="Specific Location" />
         <label for="loc-specific">Specific Location</label>
 
-        <input type="radio" name="location" id="loc-tbd" value="TBD — We Decide" />
-        <label for="loc-tbd">TBD — We Decide</label>
+        <input type="radio" name="location" id="loc-tbd" value="TBD" />
+        <label for="loc-tbd">TBD</label>
       </div>
       <div class="error-msg" id="err-location">Please select a location.</div>
     </div>
@@ -484,12 +558,29 @@
 
     <div class="field">
       <label for="recipient">Recipient <span class="hint">Who should receive the final files?</span></label>
-      <input type="text" id="recipient" name="recipient" placeholder="e.g. Ben, dealer@example.com" />
+      <input type="text" id="recipient" name="recipient" placeholder="e.g. dealer@example.com" />
     </div>
 
     <div class="field">
       <label for="peopleToCoordinate">People to coordinate <span class="hint">Anyone specific needed in planning?</span></label>
-      <input type="text" id="peopleToCoordinate" name="peopleToCoordinate" placeholder="e.g. Federico for logistics" />
+      <input type="text" id="peopleToCoordinate" name="peopleToCoordinate" placeholder="e.g. Marketing, R&D…" />
+    </div>
+
+    <div class="field">
+      <label for="reference">Reference link <span class="hint">Moodboard, inspiration, existing assets…</span></label>
+      <input type="url" id="reference" name="reference" placeholder="https://…" />
+    </div>
+
+    <div class="field">
+      <label>Attachments <span class="hint">Any file type — max 20 MB each</span></label>
+      <div class="file-drop" id="fileDrop">
+        <input type="file" id="fileUpload" name="fileUpload" multiple accept="*/*" />
+        <div class="file-drop-inner">
+          <span class="file-drop-icon">📎</span>
+          <span class="file-drop-text" id="fileDropText">Click to choose files or drag &amp; drop</span>
+        </div>
+      </div>
+      <div id="fileList" class="file-list"></div>
     </div>
 
     <div class="field">
@@ -517,12 +608,30 @@
 </div>
 
 <script>
-  // ── Conditional fields ──────────────────────────────────────────────
+  // ── Content type options by format ──────────────────────────────────
+  const VIDEO_CONTENT_TYPES = [
+    'Launch', 'Social Clip', 'YouTube Long-form', 'Tutorial',
+    'Event Coverage', 'Testimonial', 'Website Asset', 'Internal', 'Other',
+  ];
+  const PHOTO_CONTENT_TYPES = [
+    'Product Shot', 'Lifestyle', 'Social Media', 'Event Coverage',
+    'Press Kit', 'Website Asset', 'Internal', 'Other',
+  ];
 
+  function updateContentTypes(format) {
+    const select  = document.getElementById('contentType');
+    const current = select.value;
+    const types   = format === 'Photo' ? PHOTO_CONTENT_TYPES : VIDEO_CONTENT_TYPES;
+    select.innerHTML = '<option value="">Select…</option>' +
+      types.map(t => `<option${t === current ? ' selected' : ''}>${t}</option>`).join('');
+  }
+
+  // ── Conditional fields ──────────────────────────────────────────────
   document.querySelectorAll('input[name="format"]').forEach(el => {
     el.addEventListener('change', () => {
       const show = el.value === 'Video' || el.value === 'Mixed';
       document.getElementById('field-video-format').classList.toggle('visible', show);
+      updateContentTypes(el.value);
     });
   });
 
@@ -532,23 +641,81 @@
     });
   });
 
-  // ── Validation ──────────────────────────────────────────────────────
+  // ── File upload ─────────────────────────────────────────────────────
+  let selectedFiles = [];
 
+  const fileDrop  = document.getElementById('fileDrop');
+  const fileInput = document.getElementById('fileUpload');
+  const fileList  = document.getElementById('fileList');
+
+  fileInput.addEventListener('change', () => addFiles(fileInput.files));
+
+  fileDrop.addEventListener('dragover', e => { e.preventDefault(); fileDrop.classList.add('dragging'); });
+  fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('dragging'));
+  fileDrop.addEventListener('drop', e => {
+    e.preventDefault();
+    fileDrop.classList.remove('dragging');
+    addFiles(e.dataTransfer.files);
+  });
+
+  function addFiles(files) {
+    for (const f of files) {
+      if (f.size > 20 * 1024 * 1024) { alert(`"${f.name}" exceeds 20 MB and was skipped.`); continue; }
+      if (!selectedFiles.find(x => x.name === f.name && x.size === f.size)) selectedFiles.push(f);
+    }
+    renderFileList();
+  }
+
+  function renderFileList() {
+    fileList.innerHTML = selectedFiles.map((f, i) => `
+      <div class="file-item">
+        <span class="file-item-name">${f.name}</span>
+        <span class="file-item-size">${(f.size / 1024).toFixed(0)} KB</span>
+        <button type="button" class="file-item-remove" onclick="removeFile(${i})">×</button>
+      </div>
+    `).join('');
+  }
+
+  function removeFile(i) {
+    selectedFiles.splice(i, 1);
+    renderFileList();
+  }
+
+  async function uploadFiles() {
+    if (!selectedFiles.length) return [];
+    const urls = [];
+    for (const file of selectedFiles) {
+      try {
+        const res = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}`, {
+          method: 'PUT',
+          body:   file,
+        });
+        if (res.ok) {
+          const { url } = await res.json();
+          urls.push(url);
+        }
+      } catch (_) { /* non-blocking */ }
+    }
+    return urls;
+  }
+
+  // ── Validation ──────────────────────────────────────────────────────
   function validate() {
     let ok = true;
 
     const checks = [
       { id: 'requesterName',  errId: 'err-requesterName',  check: v => v.trim().length > 0 },
       { id: 'requesterEmail', errId: 'err-requesterEmail', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+      { id: 'projectName',    errId: 'err-projectName',    check: v => v.trim().length > 0 },
       { id: 'request',        errId: 'err-request',        check: v => v.trim().length > 0 },
       { id: 'contentType',    errId: 'err-contentType',    check: v => v !== '' },
       { id: 'distribution',   errId: 'err-distribution',   check: v => v !== '' },
-      { id: 'quantity',        errId: 'err-quantity',       check: v => v > 0 },
-      { id: 'deadline',        errId: 'err-deadline',       check: v => v !== '' },
+      { id: 'quantity',       errId: 'err-quantity',       check: v => v > 0 },
+      { id: 'deadline',       errId: 'err-deadline',       check: v => v !== '' },
     ];
 
     checks.forEach(({ id, errId, check }) => {
-      const el = document.getElementById(id);
+      const el  = document.getElementById(id);
       const err = document.getElementById(errId);
       const valid = check(el.value);
       el.classList.toggle('error', !valid);
@@ -576,7 +743,6 @@
   }
 
   // ── Submit ──────────────────────────────────────────────────────────
-
   document.getElementById('requestForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -585,9 +751,16 @@
     btn.disabled = true;
     btn.textContent = 'Sending…';
 
+    // Upload files first (non-blocking — if upload fails, form still submits)
+    const fileUrls = await uploadFiles();
+
+    const referenceInput = document.getElementById('reference').value.trim();
+    const allReferences  = [referenceInput, ...fileUrls].filter(Boolean);
+
     const data = {
       requesterName:      document.getElementById('requesterName').value.trim(),
       requesterEmail:     document.getElementById('requesterEmail').value.trim(),
+      projectName:        document.getElementById('projectName').value.trim(),
       priority:           document.querySelector('input[name="priority"]:checked')?.value,
       request:            document.getElementById('request').value.trim(),
       format:             document.querySelector('input[name="format"]:checked')?.value,
@@ -603,24 +776,21 @@
       requester:          document.getElementById('requester').value.trim() || null,
       recipient:          document.getElementById('recipient').value.trim() || null,
       peopleToCoordinate: document.getElementById('peopleToCoordinate').value.trim() || null,
+      reference:          allReferences.length ? allReferences.join('\n') : null,
       notes:              document.getElementById('notes').value.trim() || null,
     };
 
     try {
       const res = await fetch('/api/submit', {
-        method: 'POST',
+        method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body:    JSON.stringify(data),
       });
 
       if (!res.ok) throw new Error('Server error');
 
       const json = await res.json();
-
-      // Update track link with the returned item ID
-      if (json.itemId) {
-        document.getElementById('trackLink').href = `/track?id=${json.itemId}`;
-      }
+      if (json.itemId) document.getElementById('trackLink').href = `/track?id=${json.itemId}`;
 
       document.getElementById('requestForm').style.display = 'none';
       document.getElementById('successState').style.display = 'block';
@@ -634,9 +804,11 @@
 
   function resetForm() {
     document.getElementById('requestForm').reset();
-    document.getElementById('requestForm').style.display = 'block';
+    selectedFiles = [];
+    renderFileList();
+    document.getElementById('requestForm').style.display  = 'block';
     document.getElementById('successState').style.display = 'none';
-    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('submitBtn').disabled    = false;
     document.getElementById('submitBtn').textContent = 'Send Request →';
     document.querySelectorAll('.conditional').forEach(el => el.classList.remove('visible'));
   }
