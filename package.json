@@ -7,8 +7,8 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@sendgrid/mail": "^8.1.6",
-    "nodemailer": "^8.0.7",
-    "resend": "^3.2.0"
+    "@vercel/blob": "^0.27.0",
+    "resend": "^3.2.0",
+    "vercel": "^54.2.0"
   }
 }
