@@ -49,7 +49,12 @@ export default async function handler(req, res) {
   if (d.peopleToCoordinate) colValues[COL.peopleToCoordinate] = d.peopleToCoordinate;
   if (d.reference)          colValues[COL.reference]          = { url: d.reference, text: d.reference };
   if (d.approvalRequired)   colValues[COL.approvalRequired]   = { label: d.approvalRequired };
-  if (d.notes)              colValues[COL.notes]              = { text: d.notes };
+
+  // Build notes: user notes + uploaded file URLs
+  const noteParts = [];
+  if (d.notes)              noteParts.push(d.notes);
+  if (d.uploadedFileUrls?.length) noteParts.push(`📎 Uploaded files:\n${d.uploadedFileUrls.join('\n')}`);
+  if (noteParts.length)     colValues[COL.notes]              = { text: noteParts.join('\n\n') };
 
   let itemId;
   try {
