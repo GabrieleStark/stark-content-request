@@ -8,7 +8,7 @@ import { sendApproved, sendRejected } from './_email.js';
 const NOTION_API  = 'https://api.notion.com/v1';
 const NOTION_VER  = '2022-06-28';
 const PROJECTS_DB = '36464f16-cf3f-81a7-bbb3-f4761c94b070'; // Projects database
-const TASKS_DB    = '36464f16-cf3f-8127-880d-000b77860cd4'; // Tasks database
+const TASKS_DB    = '36464f16-cf3f-81ad-ae40-c9c473f9ba98'; // Tasks database
 
 // ── Task templates by format ────────────────────────────────────────────────
 const TASKS_BY_FORMAT = {
@@ -89,10 +89,20 @@ async function createNotionProject(item) {
   const contentType = getColValue(item, COL.contentType) || '';
   const description = getColValue(item, COL.notes)       || name;
 
+  // Map form format → Notion Format multi_select options
+  const FORMAT_MAP = { 'Video': 'Video', 'Photo': 'Photos', 'Mixed': 'Video & Photo' };
+  const notionFormat = FORMAT_MAP[format] || 'Video';
+
+  // Map form priority → Notion Priority multi_select options
+  const PRIORITY_MAP = { 'Urgent': 'Urgent', 'High': 'Urgent', 'Normal': 'Medium', 'Low': 'Low' };
+  const notionPriority = PRIORITY_MAP[getColValue(item, COL.priority)] || 'Medium';
+
   // Project properties
   const props = {
-    'Name':   { title: richText(name) },
-    'Status': { status: { name: 'In progress' } },
+    'Name':     { title: richText(name) },
+    'Status':   { status: { name: 'In progress' } },
+    'Format':   { multi_select: [{ name: notionFormat }] },
+    'Priority': { multi_select: [{ name: notionPriority }] },
   };
   if (deadline) {
     props['Release Date'] = { date: { start: deadline } };
