@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   const d = req.body;
 
   // Validate required fields server-side
-  const required = ['request', 'format', 'contentType', 'distribution',
+  const required = ['projectName', 'request', 'format', 'contentType', 'distribution',
                     'quantity', 'deadline', 'location', 'bikesInvolved',
                     'requesterName', 'requesterEmail'];
   for (const f of required) {
@@ -21,10 +21,10 @@ export default async function handler(req, res) {
   const editToken    = randomUUID();
   const approveToken = randomUUID();
 
-  // Item name = first 80 chars of request description
-  const itemName = d.request.length > 80
-    ? d.request.substring(0, 80) + '…'
-    : d.request;
+  // Item name = project name (truncated to 80 chars if needed)
+  const itemName = d.projectName.length > 80
+    ? d.projectName.substring(0, 80) + '…'
+    : d.projectName;
 
   // Build Monday column values
   const colValues = {
