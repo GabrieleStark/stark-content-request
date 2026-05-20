@@ -31,7 +31,7 @@ function buildRichTextSummary(item) {
     ['Distribution',     v(COL.distribution)],
     ['Quantity',         v(COL.quantity)],
     ['Deadline',         v(COL.deadline)],
-    ['Location',         v(COL.location)],
+    ['Location',         v(COL.location) + (v(COL.locationDetails) ? ' — ' + v(COL.locationDetails) : '')],
     ['Bikes',            v(COL.bikesInvolved) + (v(COL.whichModels) ? ' — ' + v(COL.whichModels) : '')],
     v(COL.actors)             && ['Actors/Riders',   v(COL.actors)],
     v(COL.requester)          && ['On behalf of',    v(COL.requester)],
