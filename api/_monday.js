@@ -121,3 +121,14 @@ export function getColValue(item, colId) {
   const col = item.column_values.find(c => c.id === colId);
   return col?.text ?? null;
 }
+
+export async function createUpdate(itemId, body) {
+  await mondayQuery(`
+    mutation {
+      create_update(
+        item_id: ${itemId},
+        body: ${JSON.stringify(body)}
+      ) { id }
+    }
+  `);
+}
