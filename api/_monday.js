@@ -25,6 +25,7 @@ export const COL = {
   rejectionReason:    'long_text_mm3ggnsk',
   editToken:          'text_mm3gqpd8',
   approveToken:       'text_mm3g4qxz',
+  locationDetails:    'text_mm3hasjq',
 };
 
 export const GROUP = {
