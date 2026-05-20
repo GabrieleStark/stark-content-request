@@ -26,15 +26,19 @@ export default async function handler(req, res) {
     ? d.projectName.substring(0, 80) + '…'
     : d.projectName;
 
+  // Map form values to Monday labels where they differ
+  const LOCATION_MAP     = { 'TBD': 'TBD — We Decide' };
+  const DISTRIBUTION_MAP = { 'Partners': 'Inside Network' };
+
   // Build Monday column values
   const colValues = {
     [COL.priority]:       { label: d.priority || 'Normal' },
     [COL.format]:         { label: d.format },
     [COL.contentType]:    { labels: [d.contentType] },
-    [COL.distribution]:   { labels: [d.distribution] },
+    [COL.distribution]:   { labels: [DISTRIBUTION_MAP[d.distribution] || d.distribution] },
     [COL.quantity]:       d.quantity,
     [COL.deadline]:       { date: d.deadline },
-    [COL.location]:       { label: d.location },
+    [COL.location]:       { label: LOCATION_MAP[d.location] || d.location },
     [COL.bikesInvolved]:  { label: d.bikesInvolved },
     [COL.requester]:      d.requesterName,
     [COL.requesterEmail]: { email: d.requesterEmail, text: d.requesterEmail },
