@@ -10,41 +10,11 @@ const NOTION_VER  = '2022-06-28';
 const PROJECTS_DB = '36464f16-cf3f-81a7-bbb3-f4761c94b070'; // Projects database
 const TASKS_DB    = '36464f16-cf3f-81ad-ae40-c9c473f9ba98'; // Tasks database
 
-// ── Task templates by format ────────────────────────────────────────────────
-const TASKS_BY_FORMAT = {
-  'Video': [
-    { name: 'Planning & Brief',  status: 'Planning'    },
-    { name: 'Filming',           status: 'Not Started' },
-    { name: 'Editing',           status: 'Not Started' },
-    { name: 'Color Grading',     status: 'Not Started' },
-    { name: 'Review & Approval', status: 'Not Started' },
-    { name: 'Export & Delivery', status: 'Not Started' },
-  ],
-  'Photo': [
-    { name: 'Planning & Brief',  status: 'Planning'    },
-    { name: 'Shooting',          status: 'Not Started' },
-    { name: 'Selection',         status: 'Not Started' },
-    { name: 'Retouching',        status: 'Not Started' },
-    { name: 'Review & Approval', status: 'Not Started' },
-    { name: 'Export & Delivery', status: 'Not Started' },
-  ],
-  'Mixed': [
-    { name: 'Planning & Brief',  status: 'Planning'    },
-    { name: 'Filming',           status: 'Not Started' },
-    { name: 'Shooting',          status: 'Not Started' },
-    { name: 'Editing',           status: 'Not Started' },
-    { name: 'Color Grading',     status: 'Not Started' },
-    { name: 'Retouching',        status: 'Not Started' },
-    { name: 'Review & Approval', status: 'Not Started' },
-    { name: 'Export & Delivery', status: 'Not Started' },
-  ],
-};
-
-// Extra tasks by content type
-const EXTRA_BY_CONTENT_TYPE = {
-  'Tutorial':          { name: 'Script Writing',     status: 'Planning'    },
-  'YouTube Long-form': { name: 'Thumbnail Design',   status: 'Not Started' },
-  'Launch':            { name: 'Brief & Positioning', status: 'Planning'   },
+// Delivery task name by format
+const DELIVERY_TASK = {
+  'Video': 'Video Delivery',
+  'Photo': 'Photo Delivery',
+  'Mixed': 'Delivery',
 };
 
 function notionHeaders() {
@@ -155,29 +125,30 @@ async function createNotionProject(item) {
   return { pageId: page.id, pageUrl: page.url, format, contentType };
 }
 
-// ── Create tasks linked to the project ──────────────────────────────────────
+// ── Create single delivery task linked to the project ───────────────────────
 async function createProjectTasks(pageId, pageUrl, format, contentType, deadline) {
-  const baseTasks = TASKS_BY_FORMAT[format] || TASKS_BY_FORMAT['Video'];
-  const extra     = EXTRA_BY_CONTENT_TYPE[contentType];
-  const tasks     = extra ? [extra, ...baseTasks] : baseTasks;
+  const taskName = DELIVERY_TASK[format] || 'Delivery';
 
-  await Promise.all(tasks.map(task =>
-    fetch(`${NOTION_API}/pages`, {
-      method:  'POST',
-      headers: notionHeaders(),
-      body:    JSON.stringify({
-        parent:     { database_id: TASKS_DB },
-        properties: {
-          'Name':    { title: richText(task.name) },
-          'Status':  { select: { name: task.status } },
-          'Project': { relation: [{ id: pageId }] },
-          ...(deadline && task.status !== 'Planning'
-            ? { 'Due Date': { date: { start: deadline } } }
-            : {}),
-        },
-      }),
-    }).then(r => { if (!r.ok) console.error(`Task "${task.name}" failed:`, r.status); })
-  ));
+  const res = await fetch(`${NOTION_API}/pages`, {
+    method:  'POST',
+    headers: notionHeaders(),
+    body:    JSON.stringify({
+      parent:     { database_id: TASKS_DB },
+      properties: {
+        'Name':    { title: richText(taskName) },
+        'Status':  { select: { name: 'Not Started' } },
+        'Project': { relation: [{ id: pageId }] },
+        ...(deadline ? { 'Due Date': { date: { start: deadline } } } : {}),
+      },
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    console.error(`[notion] Task "${taskName}" failed ${res.status}:`, err);
+  } else {
+    console.log(`[notion] Task "${taskName}" created`);
+  }
 }
 
 // ── Full Notion setup on approval ────────────────────────────────────────────
